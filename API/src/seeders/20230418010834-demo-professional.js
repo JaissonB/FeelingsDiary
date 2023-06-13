@@ -6,7 +6,9 @@ module.exports = {
     await queryInterface.bulkInsert('Professionals', [
     {
       user_id: 1,
-      tag: '1234567'
+      tag: '1234567',
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
   ], {});
   },

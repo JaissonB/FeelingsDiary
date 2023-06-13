@@ -1,2 +1,2 @@
-# uri-audioNotes-api
-REST API for mobile app to transcribe audio into AI sorted reminders
+# feelyngsDiary-api
+REST API for mobile app to transcribe take notes and sentiment analisys
