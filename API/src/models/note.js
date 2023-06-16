@@ -21,10 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     positive: DataTypes.FLOAT,
     negative: DataTypes.FLOAT,
-    neutral: DataTypes.FLOAT
+    neutral: DataTypes.FLOAT,
+    sentiment: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Notes',
+    modelName: 'Note',
   });
   return Notes;
 };
