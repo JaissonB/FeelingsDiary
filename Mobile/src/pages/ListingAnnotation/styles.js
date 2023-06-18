@@ -3,27 +3,25 @@ import theme from '../../theme';
 
 const styles = StyleSheet.create({
 	safe: {
-		//	backgroundColor: '#FFFFFF',
-		paddingHorizontal: 20,
+		backgroundColor: '#FFFFFF',
+		//paddingHorizontal: 20,
 	},
 	container: {
 		height: "100%",
-		paddingTop: 25,
+		//paddingTop: 25,
 	},
 
 
-	container: {
-		flex: 1,
-		//marginTop: StatusBar.currentHeight || 0,
+	itemList: {
+		backgroundColor: '#577EFF',
+		padding: 25,
 	},
-	item: {
-		backgroundColor: '#FF0000',
-		padding: 20,
-		marginVertical: 8,
-		marginHorizontal: 16,
+	itemtext: {
+
 	},
 	title: {
-		fontSize: 32,
+		color: '#FFFFFF',
+		fontSize: 20,
 	},
 
 });

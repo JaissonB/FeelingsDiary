@@ -10,9 +10,16 @@ function App(): JSX.Element {
 
   return <>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ListingAnnotation" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ListingAnnotation" component={ListingAnnotation} />
+      <Stack.Navigator initialRouteName="ListingAnnotation">
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+
+        <Stack.Screen name="ListingAnnotation" component={ListingAnnotation}
+          options={{
+            title: 'Entradas',
+            headerStyle: { backgroundColor: '#5AB4FF' }
+          }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   </>
