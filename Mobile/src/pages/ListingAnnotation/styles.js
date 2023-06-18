@@ -3,12 +3,8 @@ import theme from '../../theme';
 
 const styles = StyleSheet.create({
 	safe: {
-		backgroundColor: '#FFFFFF',
-		//paddingHorizontal: 20,
-	},
-	container: {
 		height: "100%",
-		//paddingTop: 25,
+		backgroundColor: '#FFFFFF',
 	},
 
 

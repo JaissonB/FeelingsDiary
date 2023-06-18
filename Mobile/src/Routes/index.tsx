@@ -3,23 +3,17 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../pages/Login';
-import ListingAnnotation from '../pages/ListingAnnotation';
+// import ListingAnnotation from '../pages/ListingAnnotation';
+import RoutesDrawer from './RoutesDrawer';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
   return <>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ListingAnnotation">
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-
-        <Stack.Screen name="ListingAnnotation" component={ListingAnnotation}
-          options={{
-            title: 'Entradas',
-            headerStyle: { backgroundColor: '#5AB4FF' }
-          }}
-        />
-
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="RoutesDrawer" component={RoutesDrawer} />
       </Stack.Navigator>
     </NavigationContainer>
   </>

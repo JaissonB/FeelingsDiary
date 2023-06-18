@@ -1,6 +1,5 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-
 import styles from "./styles";
 
 const ListingAnnotation = () => {
@@ -55,13 +54,11 @@ const ListingAnnotation = () => {
 
   return <>
     <View style={styles.safe}>
-      <View style={styles.container}>
-        {/* <FlatList
-          data={tempData}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Item title={item.title} dateRegistration={item.dateRegistration} />}
-        /> */}
-      </View>
+      <FlatList
+        data={tempData}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Item title={item.title} dateRegistration={item.dateRegistration} />}
+      />
     </View>
   </>
 }
