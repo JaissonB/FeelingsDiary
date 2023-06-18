@@ -2,14 +2,18 @@ import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './style';
 
+import { useNavigation } from "@react-navigation/native";
+
 const Login = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     // Lógica de autenticação aqui
-    console.log('Email:', email);
-    console.log('Password:', password);
+    // console.log('Email:', email);
+    // console.log('Password:', password);
+    navigation.navigate('RoutesDrawer');
   };
 
   const handleRegister = () => {
