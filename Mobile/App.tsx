@@ -1,27 +1,10 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './src/pages/Login';
-import ListingAnnotation from './src/pages/ListingAnnotation';
-
-const Stack = createNativeStackNavigator();
+import Routes from './src/Routes';
 
 function App(): JSX.Element {
 
   return <>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="ListingAnnotation">
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-
-        <Stack.Screen name="ListingAnnotation" component={ListingAnnotation}
-          options={{
-            title: 'Entradas',
-            headerStyle: { backgroundColor: '#5AB4FF' }
-          }}
-        />
-
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Routes />
   </>
 }
 
