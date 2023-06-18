@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './style';
 
 import { useNavigation } from "@react-navigation/native";
@@ -23,9 +23,13 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require('../../../../Mobile/assets/logo.jpeg')}
+        style={styles.logo}
+      />
       <TextInput
         id="email"
-        placeholderTextColor="white"
+        placeholderTextColor="#000000"
         style={styles.input}
         placeholder="E-mail"
         onChangeText={text => setEmail(text)}
@@ -33,7 +37,7 @@ const Login = () => {
       />
       <TextInput
         id="senha"
-        placeholderTextColor="white"
+        placeholderTextColor="#000000"
         style={styles.input}
         placeholder="Password"
         onChangeText={text => setPassword(text)}
