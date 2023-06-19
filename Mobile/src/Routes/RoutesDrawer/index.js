@@ -8,64 +8,64 @@ import Configuration from '../../pages/Configuration';
 const Drawer = createDrawerNavigator();
 
 const ScreenExit = () => {
-	return <>
-		<Pressable
-			onPress={Alert.alert('Implementar Log out')}
-		>
-		</Pressable>
-	</>
+  return <>
+    <Pressable
+      onPress={Alert.alert('Implementar Log out')}
+    >
+    </Pressable>
+  </>
 }
 
 const RoutesDrawer = () => {
 
-	return <>
-		<Drawer.Navigator
-			screenOptions={
-				{
-					headerTintColor: '#fff',
-					headerStyle: {
-						backgroundColor: '#5AB4FF'
-					},
-					drawerType: "front",
-					drawerInactiveTintColor: "#FFFFFF",
-					drawerActiveTintColor: "#FFFFFF",
-					drawerStyle: {
-						backgroundColor: "#5AB4FF",
-						width: "70%",
-					},
-					drawerLabelStyle: { fontSize: 17, fontWeight: "bold" }
-				}
-			}
-		>
-			<Drawer.Screen name="ListingAnnotation" component={ListingAnnotation}
-				options={{
-					title: "Anotações",
-					drawerIcon: () => {
-						<AntDesign name="dashboard" size={20} color="#FFFFFF" />
-					}
-				}}
-			/>
+  return <>
+    <Drawer.Navigator
+      screenOptions={
+        {
+          headerTintColor: '#fff',
+          headerStyle: {
+            backgroundColor: '#5AB4FF'
+          },
+          drawerType: "front",
+          drawerInactiveTintColor: "#FFFFFF",
+          drawerActiveTintColor: "#FFFFFF",
+          drawerStyle: {
+            backgroundColor: "#5AB4FF",
+            width: "70%",
+          },
+          drawerLabelStyle: { fontSize: 17, fontWeight: "bold" }
+        }
+      }
+    >
+      <Drawer.Screen name="ListingAnnotation" component={ListingAnnotation}
+        options={{
+          title: "Anotações",
+          drawerIcon: () => {
+            <AntDesign name="dashboard" size={20} color="#FFFFFF" />
+          }
+        }}
+      />
 
-			<Drawer.Screen name="Configuration" component={Configuration}
-				options={{
-					title: "Configurações",
-					drawerIcon: () => {
-						<AntDesign name="dashboard" size={20} color="#FFFFFF" />
-					}
-				}}
-			/>
+      <Drawer.Screen name="Configuration" component={Configuration}
+        options={{
+          title: "Configurações",
+          drawerIcon: () => {
+            <AntDesign name="dashboard" size={20} color="#FFFFFF" />
+          }
+        }}
+      />
 
-			<Drawer.Screen name="ScreenExit" component={ScreenExit}
-				options={{
-					title: "Sair",
-					drawerIcon: () => {
-						<AntDesign name="dashboard" size={20} color="#FFFFFF" />
-					}
-				}}
-			/>
+      <Drawer.Screen name="ScreenExit" component={ScreenExit}
+        options={{
+          title: "Sair",
+          drawerIcon: () => {
+            <AntDesign name="dashboard" size={20} color="#FFFFFF" />
+          }
+        }}
+      />
 
-		</Drawer.Navigator >
-	</>
+    </Drawer.Navigator >
+  </>
 }
 
-export default RoutesDrawer; 
+export default RoutesDrawer;

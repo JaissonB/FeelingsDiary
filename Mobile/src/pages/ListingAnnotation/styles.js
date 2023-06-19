@@ -4,19 +4,24 @@ import theme from '../../theme';
 const styles = StyleSheet.create({
 	safe: {
 		height: "100%",
-		backgroundColor: '#FFFFFF',
 	},
 
 
 	itemList: {
-		backgroundColor: '#577EFF',
+		flexDirection: "row",
+		justifyContent: "space-between",
+		borderColor: "#EE4141", 
 		padding: 25,
+		margin: 2,
+		borderRadius: 10,
+		borderWidth: 5,
+		
 	},
-	itemtext: {
+	RigthItem: {
 
 	},
 	title: {
-		color: '#FFFFFF',
+		color: '#1E1E1E',
 		fontSize: 20,
 	},
 

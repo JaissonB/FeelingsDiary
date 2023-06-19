@@ -37,18 +37,17 @@ const ListingAnnotation = () => {
     },
   ];
 
-  type ItemProps = {
-    title: string,
-    dateRegistration: string,
-  };
-
-  const Item = ({ title, dateRegistration }: ItemProps) => (
-
+  const Item = ({ title, dateRegistration, semana }) => (
     <View style={styles.itemList}>
-      <View style={styles.itemtext}>
-        <Text style={styles.title}>{title}</Text>
+
+      <View style={styles.RigthItem}>
+        <Text style={styles.title}>{semana}</Text>
+      </View>
+
+      <View>
         <Text style={styles.title}>{dateRegistration}</Text>
       </View>
+
     </View>
   );
 
@@ -57,7 +56,12 @@ const ListingAnnotation = () => {
       <FlatList
         data={tempData}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Item title={item.title} dateRegistration={item.dateRegistration} />}
+        renderItem={({ item }) =>
+          <Item
+            title={item.title}
+            dateRegistration={item.dateRegistration}
+            semana={'Sex.'} />
+        }
       />
     </View>
   </>
