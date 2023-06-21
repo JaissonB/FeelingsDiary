@@ -7,15 +7,19 @@ class NotesController {
         try {
             const dataForm = req.body;
             const userId = req.userId;
+            console.log("REQ:", req.userId)
+            console.log("REQ:", req.patientId)
             let note;
-
+            //TODO como relacionar a nova nota a um paciente ao invés de relacionar com um usuário em si?
             if (!dataForm.note_id || dataForm.note_id == null) {
-                const categoryAlias = service.verifySentiment(dataForm.content);
-                // const noteName = service.createNameByText(dataForm.content);
-                // const noteForm = service.createConversationForm(noteName, categoryAlias, userId);
+                const sentiments = service.verifySentiment(dataForm.description);
+                const noteForm = {
+                    ...dataForm,
+                    ...sentiments,
+                };
                 // AQUI EU VOU TER QUE CHAMAR UM SERVICE PARA FAZER A ANÁLISE DE SENTIMENTO E SALVAR UM
                 // noteForm JÁ COM O POSITIVE< NEGATIVE E NEUTRAL
-                note = await database.Note.create(dataForm);
+                note = await database.Note.create(noteForm);
             } else {
                 note = await database.Note.findOne({ where: {
                     id: dataForm.note_id,
@@ -29,7 +33,7 @@ class NotesController {
             // const time = message.createdAt.toISOString().split('T')[1];
             // const messageTime = (time.split(':')[0] - 3)+ ":" + time.split(':')[1];
 
-            const responseData = {res:"Alterado com sucesso!"
+            const responseData = {res: "Alterado com sucesso!", note: note,
                 // note_id: note.id,
                 // conversation_name: note.name,
                 // category_name: category.name,
@@ -52,6 +56,7 @@ class NotesController {
 
             const notes = await database.Note.findAll({
                 attributes: ['id', 'description', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
+                //TODO aqui a note não tem relação com o user apenas com o patient, como saber o id do patient com o id de usuário 'userId'
                 where: { user_id: userId },
                 order: [['createdAt', 'DESC']]
             });
