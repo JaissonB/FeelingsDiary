@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../pages/Login';
 import CrudAnnotation from '../pages/CrudAnnotation';
 import RoutesDrawer from './RoutesDrawer';
+import theme from '../theme';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,9 +20,9 @@ const Routes = () => {
             headerShown: true,
             headerTitleAlign: 'center',
             title: "Anotação",
-            headerTintColor: '#fff',
+            headerTintColor: theme.color_white,
             headerStyle: {
-              backgroundColor: "#5AB4FF",
+              backgroundColor: theme.color_primary1,
             },
           }} />
       </Stack.Navigator>

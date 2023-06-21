@@ -5,6 +5,7 @@ import { setStorageData, getStorageData } from "../../services/storage";
 
 import { useNavigation } from "@react-navigation/native";
 import api from '../../services/api';
+import theme from '../../theme';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -46,7 +47,7 @@ const Login = () => {
       />
       <TextInput
         id="email"
-        placeholderTextColor="#000000"
+        placeholderTextColor={theme.color_black}
         style={styles.input}
         placeholder="E-mail"
         onChangeText={text => setEmail(text)}
@@ -54,7 +55,7 @@ const Login = () => {
       />
       <TextInput
         id="senha"
-        placeholderTextColor="#000000"
+        placeholderTextColor={theme.color_black}
         style={styles.input}
         placeholder="Password"
         onChangeText={text => setPassword(text)}

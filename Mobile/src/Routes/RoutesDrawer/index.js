@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import ListingAnnotation from "../../pages/ListingAnnotation";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Configuration from '../../pages/Configuration';
+import theme from '../../theme';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,16 +23,16 @@ const RoutesDrawer = () => {
     <Drawer.Navigator
       screenOptions={
         {
-          headerTintColor: '#fff',
+          headerTintColor: theme.color_white,
           headerTitleAlign: 'center',
           headerStyle: {
-            backgroundColor: '#5AB4FF'
+            backgroundColor: theme.color_primary1
           },
           drawerType: "front",
-          drawerInactiveTintColor: "#FFFFFF",
-          drawerActiveTintColor: "#FFFFFF",
+          drawerInactiveTintColor: theme.color_white,
+          drawerActiveTintColor: theme.color_white,
           drawerStyle: {
-            backgroundColor: "#5AB4FF",
+            backgroundColor: theme.color_primary1,
             width: "70%",
           },
           drawerLabelStyle: { fontSize: 17, fontWeight: "bold" }
@@ -42,7 +43,7 @@ const RoutesDrawer = () => {
         options={{
           title: "Anotações",
           drawerIcon: () => {
-            <AntDesign name="dashboard" size={20} color="#FFFFFF" />
+            <AntDesign name="dashboard" size={20} color={theme.color_white} />
           }
         }}
       />
@@ -51,7 +52,7 @@ const RoutesDrawer = () => {
         options={{
           title: "Configurações",
           drawerIcon: () => {
-            <AntDesign name="dashboard" size={20} color="#FFFFFF" />
+            <AntDesign name="dashboard" size={20} color={theme.color_white} />
           }
         }}
       />
@@ -60,7 +61,7 @@ const RoutesDrawer = () => {
         options={{
           title: "Sair",
           drawerIcon: () => {
-            <AntDesign name="dashboard" size={20} color="#FFFFFF" />
+            <AntDesign name="dashboard" size={20} color={theme.color_white} />
           }
         }}
       />
