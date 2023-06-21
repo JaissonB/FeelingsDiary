@@ -23,7 +23,8 @@ class AuthenticationController {
             const dataDTO = {
                 token: token,
                 completeName: selectedUser.completeName,
-                userId: selectedUser.id
+                userId: selectedUser.id,
+                isProfessional: selectedUser.isProfessional
             };
 
             return res.status(200).json(dataDTO);

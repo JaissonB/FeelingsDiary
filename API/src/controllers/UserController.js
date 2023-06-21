@@ -1,5 +1,6 @@
 const database = require('../models');
 const bcrypt = require('bcrypt');
+const service = require('../services/TagGenerator');
 
 class UserController {
 
@@ -24,6 +25,22 @@ class UserController {
                 isProfessional: user.isProfessional
             }
 
+            if (user.isProfessional) {
+                const professionalTag = service.createTag(user.id, user.completeName)
+                const newProfessional = await database.Professional.create({
+                    user_id: user.id,
+                    tag: professionalTag,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                });
+            } else {
+                const newPatient = await database.Patient.create({
+                    user_id: user.id,
+                    tag: null,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                });
+            }
             return res.status(201).json(userDTO);
         } catch (error) {
             return res.status(500).json({ message: error.message });

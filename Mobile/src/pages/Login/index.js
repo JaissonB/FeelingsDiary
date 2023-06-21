@@ -1,19 +1,36 @@
 import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './style';
+import { setStorageData, getStorageData } from "../../services/storage";
 
 import { useNavigation } from "@react-navigation/native";
+import api from '../../services/api';
 
 const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  const writeTokenToStorage = async (token, name, flag) => {
+    await setStorageData("TOKEN", token);
+    await setStorageData("USER_NAME", name);
+    await setStorageData("IS_PROFESSIONAL", flag);
+  };
 
-  const handleLogin = () => {
-    // Lógica de autenticação aqui
-    // console.log('Email:', email);
-    // console.log('Password:', password);
-    navigation.navigate('RoutesDrawer');
+  const handleLogin = async () => {
+    const body = {
+      email: email,
+      password: password,
+    }
+    await api.post("authenticate", body).then(response => {
+      navigation.navigate("RoutesDrawer");
+      api.defaults.headers.common["authorization"] = `Bearer ${response.data.token}`;
+      writeTokenToStorage(response.data.token, response.data.completeName, response.data.isProfessional.toString());
+    }).catch(error => {
+      console.error(error.response);
+    });
+
+    return;
   };
 
   const handleRegister = () => {
@@ -24,7 +41,7 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../../Mobile/assets/logo.jpeg')}
+        source={require('../../../../Mobile/assets/logo.png')}
         style={styles.logo}
       />
       <TextInput

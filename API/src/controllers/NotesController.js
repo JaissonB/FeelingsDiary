@@ -1,42 +1,46 @@
 const database = require('../models');
-const service = require('../services/ConversationService');
-const dates = require('../services/Dates');
+const service = require('../services/SentimentalAnalysis');
 
-class ConversationController {
-    
-    static async storageMessage(req, res) {
+class NotesController {
+
+    static async storageNote(req, res) {
         try {
             const dataForm = req.body;
             const userId = req.userId;
-            let conversation;
-            
-            if (!dataForm.conversation_id || dataForm.conversation_id == null) {
-                const categoryAlias = service.verifyCategory(dataForm.content);
-                const conversationName = service.createNameByText(dataForm.content);
-                const conversationForm = service.createConversationForm(conversationName, categoryAlias, userId);
-
-                conversation = await database.Conversation.create(conversationForm);
+            console.log("REQ:", req.userId)
+            console.log("REQ:", req.patientId)
+            let note;
+            //TODO como relacionar a nova nota a um paciente ao invés de relacionar com um usuário em si?
+            if (!dataForm.note_id || dataForm.note_id == null) {
+                const sentiments = service.verifySentiment(dataForm.description);
+                const noteForm = {
+                    ...dataForm,
+                    ...sentiments,
+                };
+                // AQUI EU VOU TER QUE CHAMAR UM SERVICE PARA FAZER A ANÁLISE DE SENTIMENTO E SALVAR UM
+                // noteForm JÁ COM O POSITIVE< NEGATIVE E NEUTRAL
+                note = await database.Note.create(noteForm);
             } else {
-                conversation = await database.Conversation.findOne({ where: {
-                    id: dataForm.conversation_id,
+                note = await database.Note.findOne({ where: {
+                    id: dataForm.note_id,
                     user_id: userId
                 } });
             }
 
-            const category = await database.Category.findOne({ where: { id: conversation.category_id } });
-            const message = await database.Message.create(service.createMessageForm(dataForm.content, conversation.id));
-            const messageDate = dates.formatToDMY(message.createdAt.toISOString().split('T')[0]);
-            const time = message.createdAt.toISOString().split('T')[1];
-            const messageTime = (time.split(':')[0] - 3)+ ":" + time.split(':')[1];
+            // const category = await database.Category.findOne({ where: { id: note.category_id } });
+            // const message = await database.Message.create(service.createMessageForm(dataForm.content, note.id));
+            // const messageDate = dates.formatToDMY(message.createdAt.toISOString().split('T')[0]);
+            // const time = message.createdAt.toISOString().split('T')[1];
+            // const messageTime = (time.split(':')[0] - 3)+ ":" + time.split(':')[1];
 
-            const responseData = {
-                conversation_id: conversation.id,
-                conversation_name: conversation.name,
-                category_name: category.name,
-                message_id: message.id,
-                message_content: message.content,
-                message_date: messageDate,
-                message_time: messageTime
+            const responseData = {res: "Alterado com sucesso!", note: note,
+                // note_id: note.id,
+                // conversation_name: note.name,
+                // category_name: category.name,
+                // message_id: message.id,
+                // message_content: message.content,
+                // message_date: messageDate,
+                // message_time: messageTime
             }
            
             return res.status(201).send(responseData);
@@ -50,95 +54,62 @@ class ConversationController {
         try {
             const userId = req.userId;
 
-            const conversations = await database.Conversation.findAll({ 
-                include: {
-                    model: database.Category,
-                    attributes: ['id', 'name']
-                },
-                attributes: ['id','name'],
+            const notes = await database.Note.findAll({
+                attributes: ['id', 'description', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
+                //TODO aqui a note não tem relação com o user apenas com o patient, como saber o id do patient com o id de usuário 'userId'
                 where: { user_id: userId },
                 order: [['createdAt', 'DESC']]
             });
 
-            let allConversations = [];
+            let allNotes = [];
 
-            conversations.forEach(conversation => {
-                let conversationData = {};
+            notes.forEach(note => {
+                let noteData = {};
             
-                conversationData.conversation_id = conversation.id;
-                conversationData.conversation_name = conversation.name;
-                conversationData.category_name = conversation.Category.name;
+                noteData.note_id = note.id;
+                noteData.note_description = note.description;
+                noteData.note_title = note.title;
+                noteData.note_date = note.date;
+                noteData.note_positive = note.positive;
+                noteData.note_negative = note.negative;
+                noteData.note_neutral = note.neutral;
+                noteData.note_sentiment = note.sentiment;
                 
-                allConversations.push(conversationData);
+                allNotes.push(noteData);
             });
 
-            return res.status(200).send(allConversations);
+            return res.status(200).send(allNotes);
         } catch (error) {
             return res.status(500).send({ message: error.message })
         }
     }
 
-    static async readConversation(req, res) {
+    static async readNote(req, res) {
         try {
             const { id } = req.params;
 
-            const conversation = await database.Conversation.findOne({ 
-                include: {
-                    model: database.Category,
-                    attributes: ['id', 'name']
-                },
-                attributes: ['id','name'],
+            const note = await database.Note.findOne({ 
+                attributes: ['id', 'description', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
                 where: { id: id }
             });
 
-            const messages = await database.Message.findAll({ 
-                attributes: ['id', 'content', 'createdAt'],
-                where: { conversation_id: id },
-                raw: true
-            });
-            
-            let allMessages = [];
-
-            messages.forEach(message => {
-                let messageData = {};
-                const messageDate = dates.formatToDMY(message.createdAt.toISOString().split('T')[0]);
-                const time = message.createdAt.toISOString().split('T')[1];
-                const messageTime = (time.split(':')[0] - 3)+ ":" + time.split(':')[1];
-
-                messageData.id = message.id;
-                messageData.content = message.content;
-                messageData.messageDate = messageDate;
-                messageData.messageTime = messageTime; 
-                
-                allMessages.push(messageData);
-            });
-
-
             const responseData = {
-                conversation_id: conversation.id,
-                conversation_name: conversation.name,
-                category_name: conversation.Category.name,
-                messages: allMessages
+                note_id: note.id,
+                note_description: note.description,
+                note_title: note.title,
+                note_date: note.date,
+                note_positive: note.positive,
+                note_negative: note.negative,
+                note_neutral: note.neutral,
+                note_sentiment: note.sentiment,
             }
 
             return res.status(200).send(responseData);
         } catch (error) {
             return res.status(500).send({ message: error.message })
         }
-    }
-
-    static async verifyCategory(req, res) {
-        try {
-            const data = req.body;
-
-            return res.status(200).send(service.verifyCategory(data.content));
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send({ message: error.message })
-        }
-    }
-    
+    }    
 
 }
 
-module.exports = ConversationController;
+module.exports = NotesController;

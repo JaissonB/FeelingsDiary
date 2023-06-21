@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      //TODO Verificar cardionalidade do sequelize em todas as models
       Notes.belongsTo(models.Patient, {
         foreignKey: 'patient_id'
       })
@@ -21,10 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     positive: DataTypes.FLOAT,
     negative: DataTypes.FLOAT,
-    neutral: DataTypes.FLOAT
+    neutral: DataTypes.FLOAT,
+    sentiment: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Notes',
+    modelName: 'Note',
   });
   return Notes;
 };

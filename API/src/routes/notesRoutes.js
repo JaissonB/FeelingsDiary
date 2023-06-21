@@ -3,12 +3,12 @@ const NotesController = require('../controllers/NotesController');
 
 const router = Router();
 
-router.post('/messages', NotesController.storageMessage);
+router.post('/notes', NotesController.storageNote);
 
-router.post('/verifyCategory', NotesController.verifyCategory);
+// router.post('/verifyCategory', NotesController.verifyCategory);
 
-router.get('/conversations', NotesController.readAll);
+router.get('/notes', NotesController.readAll);
 
-router.get('/conversations/:id', NotesController.readConversation);
+router.get('/notes/:id', NotesController.readNote);
 
 module.exports = router;
