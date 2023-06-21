@@ -1,7 +1,7 @@
 import React from "react";
-import { FlatList, Text, View, TouchableOpacity } from "react-native";
+import { FlatList, Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
-
+import add from "../../../assets/add.png";
 import { useNavigation } from "@react-navigation/native";
 
 const ListingAnnotation = () => {
@@ -86,9 +86,9 @@ const ListingAnnotation = () => {
     navigation.navigate('CrudAnnotation');
   };
 
-  const Item = ({ title, dateRegistration, semana }) => (
-    <>
-      <TouchableOpacity onPress={() => {DatailAnotation()}}>
+  const Item = ({ title, dateRegistration, semana }) => {
+    return <>
+      <TouchableOpacity onPress={() => { DatailAnotation() }}>
         <View style={styles.itemList}>
           <View style={styles.RigthItem}>
             <Text style={styles.labelDate}>19</Text>
@@ -102,7 +102,7 @@ const ListingAnnotation = () => {
         </View>
       </TouchableOpacity>
     </>
-  );
+  }
 
   return <>
     <View style={styles.safe}>
@@ -117,6 +117,9 @@ const ListingAnnotation = () => {
             semana={''} />
         }
       />
+      <TouchableOpacity style={styles.addButton} onPress={() => { DatailAnotation() }}>
+        <Image source={add} style={styles.more} />
+      </TouchableOpacity>
     </View>
   </>
 }
