@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View, } from "react-native";
 import Voice from "@react-native-voice/voice";
 import styles from "./styles";
@@ -27,13 +27,19 @@ const NavigateComponent = () => {
 const CrudAnnotation = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [result, setResult] = useState('');
   const [audioError, setAudioError] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
   Voice.onSpeechStart = () => setIsRecording(true);
   Voice.onSpeechEnd = () => setIsRecording(false);
   Voice.onSpeechError = (error) => setAudioError(error.error);
-  Voice.onSpeechResults = (result) => setDescription(result.value[0]);
+  Voice.onSpeechResults = (result) => setResult(result.value[0]);
+
+  useEffect(() => {
+    const newDescription = description.trim() ? description + ". " + result : result;
+    setDescription(newDescription);
+  }, [result])
 
   const startRecording = async () => {
     try {
@@ -75,7 +81,7 @@ const CrudAnnotation = () => {
       </View>
 
       <View style={styles.containerMicButton}>
-        <TouchableOpacity style={styles.micButton}>
+        <TouchableOpacity onPress={isRecording ? stopRecording : startRecording} style={styles.micButton}>
           <Image style={styles.micImage} source={require("../../../assets/mic.png")}/>
         </TouchableOpacity>
         { isRecording && <Text style={styles.textRecording}>Ouvindo...</Text> }
