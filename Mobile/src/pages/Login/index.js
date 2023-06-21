@@ -29,7 +29,7 @@ const Login = () => {
     }).catch(error => {
       console.error(error.response);
     });
-    
+
     return;
   };
 
@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../../Mobile/assets/logo.jpeg')}
+        source={require('../../../../Mobile/assets/logo.png')}
         style={styles.logo}
       />
       <TextInput
