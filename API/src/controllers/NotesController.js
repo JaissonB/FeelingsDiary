@@ -7,43 +7,28 @@ class NotesController {
         try {
             const dataForm = req.body;
             const userId = req.userId;
-            console.log("REQ:", req.userId)
-            console.log("REQ:", req.patientId)
+            const patient = await database.Patient.findOne({ where: {
+                user_id: userId
+            }});
             let note;
-            //TODO como relacionar a nova nota a um paciente ao invés de relacionar com um usuário em si?
             if (!dataForm.note_id || dataForm.note_id == null) {
                 const sentiments = service.verifySentiment(dataForm.description);
                 const noteForm = {
                     ...dataForm,
                     ...sentiments,
+                    patient_id: patient.id
                 };
-                // AQUI EU VOU TER QUE CHAMAR UM SERVICE PARA FAZER A ANÁLISE DE SENTIMENTO E SALVAR UM
-                // noteForm JÁ COM O POSITIVE< NEGATIVE E NEUTRAL
                 note = await database.Note.create(noteForm);
             } else {
                 note = await database.Note.findOne({ where: {
                     id: dataForm.note_id,
-                    user_id: userId
-                } });
+                    patient_id: patient.id
+                }});
             }
 
-            // const category = await database.Category.findOne({ where: { id: note.category_id } });
-            // const message = await database.Message.create(service.createMessageForm(dataForm.content, note.id));
-            // const messageDate = dates.formatToDMY(message.createdAt.toISOString().split('T')[0]);
-            // const time = message.createdAt.toISOString().split('T')[1];
-            // const messageTime = (time.split(':')[0] - 3)+ ":" + time.split(':')[1];
-
-            const responseData = {res: "Alterado com sucesso!", note: note,
-                // note_id: note.id,
-                // conversation_name: note.name,
-                // category_name: category.name,
-                // message_id: message.id,
-                // message_content: message.content,
-                // message_date: messageDate,
-                // message_time: messageTime
-            }
+            // const responseData = { note: note }
            
-            return res.status(201).send(responseData);
+            return res.status(201).send(note);
 
         } catch (error) {
             return res.status(500).send({ message: error.message });
@@ -53,11 +38,12 @@ class NotesController {
     static async readAll(req, res) {
         try {
             const userId = req.userId;
-
+            const patient = await database.Patient.findOne({ where: {
+                user_id: userId
+            }});
             const notes = await database.Note.findAll({
                 attributes: ['id', 'description', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
-                //TODO aqui a note não tem relação com o user apenas com o patient, como saber o id do patient com o id de usuário 'userId'
-                where: { user_id: userId },
+                where: { patient_id: patient.id },
                 order: [['createdAt', 'DESC']]
             });
 
@@ -66,14 +52,14 @@ class NotesController {
             notes.forEach(note => {
                 let noteData = {};
             
-                noteData.note_id = note.id;
-                noteData.note_description = note.description;
-                noteData.note_title = note.title;
-                noteData.note_date = note.date;
-                noteData.note_positive = note.positive;
-                noteData.note_negative = note.negative;
-                noteData.note_neutral = note.neutral;
-                noteData.note_sentiment = note.sentiment;
+                noteData.id = note.id;
+                noteData.description = note.description;
+                noteData.title = note.title;
+                noteData.date = note.date;
+                noteData.positive = note.positive;
+                noteData.negative = note.negative;
+                noteData.neutral = note.neutral;
+                noteData.sentiment = note.sentiment;
                 
                 allNotes.push(noteData);
             });
@@ -108,7 +94,7 @@ class NotesController {
         } catch (error) {
             return res.status(500).send({ message: error.message })
         }
-    }    
+    }
 
 }
 
