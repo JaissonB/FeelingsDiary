@@ -44,7 +44,7 @@ class NotesController {
             const notes = await database.Note.findAll({
                 attributes: ['id', 'description', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
                 where: { patient_id: patient.id },
-                order: [['createdAt', 'DESC']]
+                order: [['date', 'DESC']]
             });
 
             let allNotes = [];

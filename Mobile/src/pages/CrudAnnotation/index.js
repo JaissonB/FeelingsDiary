@@ -91,8 +91,8 @@ const CrudAnnotation = () => {
         <TouchableOpacity style={styles.button} onPress={() => { }}>
           <Text style={styles.buttonText}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => { }}>
-          <Text style={styles.buttonText}>Salvar</Text>
+        <TouchableOpacity style={styles.buttonSave} onPress={() => { }}>
+          <Text style={styles.buttonTextSave}>Salvar</Text>
         </TouchableOpacity>
       </View>
     </View>

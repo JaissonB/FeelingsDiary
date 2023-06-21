@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 		left: 20
 	},
 	micButton: {
-		backgroundColor: theme.color_primary1,
+		backgroundColor: theme.color_primary10,
 		width: 85,
 		height: 85,
 		borderRadius: 50,
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
 	textRecording: {
 		color: "red"
 	},
-
 	viewButtons: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
@@ -79,6 +78,19 @@ const styles = StyleSheet.create({
 	},
 	buttonText: {
 		color: theme.color_dark5,
+		fontSize: 18,
+		fontFamily: 'Inter-Bold',
+	},
+	buttonSave: {
+		width: '40%',
+		borderRadius: 10,
+		backgroundColor: theme.color_primary1,
+		height: 48,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	buttonTextSave: {
+		color: theme.color_white,
 		fontSize: 18,
 		fontFamily: 'Inter-Bold',
 	},
