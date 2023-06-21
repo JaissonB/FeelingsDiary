@@ -4,20 +4,37 @@ import theme from '../../theme';
 const styles = StyleSheet.create({
 	safe: {
 		height: "100%",
-		backgroundColor: '#FFFFFF',
+		paddingHorizontal: 10,
 	},
 
 
 	itemList: {
-		backgroundColor: '#577EFF',
-		padding: 25,
+		flexDirection: "row",
+		borderBottomWidth: 1,
 	},
-	itemtext: {
+	RigthItem: {
+		width: "20%",
+		marginVertical: 10,
+		alignItems: 'center',
+	},
 
+	labelDate: {
+		color: '#1E1E1E',
+		fontFamily: 'Inter-Bold',
+		fontSize: 14,
 	},
-	title: {
-		color: '#FFFFFF',
-		fontSize: 20,
+	leftItem: {
+		marginHorizontal: 8,
+		justifyContent: 'center',
+	},
+	labelTitle: {
+		color: '#1E1E1E',
+		fontFamily: 'Inter-Bold',
+		fontSize: 14,
+	},
+	labelAnotation: {
+		color: '#1E1E1E',
+		fontSize: 14,
 	},
 
 });
