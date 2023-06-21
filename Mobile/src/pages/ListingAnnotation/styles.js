@@ -10,35 +10,24 @@ const styles = StyleSheet.create({
 
 	itemList: {
 		flexDirection: "row",
-		//justifyContent: "space-between",
-		//borderColor: "#EE41AA",
-		//padding: 25,
-		//margin: 2,
-		//borderRadius: 10,
 		borderBottomWidth: 1,
 	},
 	RigthItem: {
-		//backgroundColor: 'red',
-		width: "20%", 
+		width: "20%",
 		marginVertical: 10,
 		alignItems: 'center',
 	},
-	
+
 	labelDate: {
 		color: '#1E1E1E',
 		fontFamily: 'Inter-Bold',
 		fontSize: 14,
-    
 	},
-	
-	leftItem:{
+	leftItem: {
+		marginHorizontal: 8,
 		justifyContent: 'center',
-		backgroundColor: "red",
-		alignItems: 'flex-end',
 	},
 	labelTitle: {
-
-	
 		color: '#1E1E1E',
 		fontFamily: 'Inter-Bold',
 		fontSize: 14,

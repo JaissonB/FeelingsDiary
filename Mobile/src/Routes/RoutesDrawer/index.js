@@ -23,6 +23,7 @@ const RoutesDrawer = () => {
       screenOptions={
         {
           headerTintColor: '#fff',
+          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#5AB4FF'
           },
