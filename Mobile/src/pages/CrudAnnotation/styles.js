@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
 	safe: {
@@ -22,12 +23,12 @@ const styles = StyleSheet.create({
 		height: 30,
 	},
 	textData: {
-		color: '#1E1E1E',
+		color: theme.color_dark5,
 		fontFamily: 'Inter-Bold',
 		fontSize: 20,
 	},
 	textlabelField: {
-		color: '#1E1E1E',
+		color: theme.color_dark5,
 		fontFamily: 'Inter-Bold',
 		fontSize: 15,
 		paddingBottom: 3,
@@ -35,6 +36,31 @@ const styles = StyleSheet.create({
 	},
 	inputTitle: {
 		marginBottom: "10%",
+	},
+	containerMicButton: {
+		width: "100%",
+		alignItems: "center",
+		flexDirection: "column",
+		justifyContent: "center",
+		position: "absolute",
+		bottom: 150,
+		right: 0,
+		left: 20
+	},
+	micButton: {
+		backgroundColor: theme.color_primary1,
+		width: 85,
+		height: 85,
+		borderRadius: 50,
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	micImage: {
+		width: 60,
+		height: 60
+	},
+	textRecording: {
+		color: "red"
 	},
 
 	viewButtons: {
@@ -45,14 +71,14 @@ const styles = StyleSheet.create({
 	button: {
 		width: '40%',
 		borderRadius: 10,
-		borderColor: '#1E1E1E',
+		borderColor: theme.color_dark5,
 		borderWidth: 1,
 		height: 48,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	buttonText: {
-		color: '#1E1E1E',
+		color: theme.color_dark5,
 		fontSize: 18,
 		fontFamily: 'Inter-Bold',
 	},
