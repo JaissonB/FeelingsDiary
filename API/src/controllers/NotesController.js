@@ -1,5 +1,5 @@
 const database = require('../models');
-const service = require('../services/SentimentalAnalysis');
+const analyzerService = require('../services/SentimentalAnalysis');
 
 class NotesController {
 
@@ -12,7 +12,7 @@ class NotesController {
             }});
             let note;
             if (!dataForm.note_id || dataForm.note_id == null) {
-                const sentiments = service.verifySentiment(dataForm.description);
+                const sentiments = analyzerService.verifySentiment(dataForm.description);
                 const noteForm = {
                     ...dataForm,
                     ...sentiments,
