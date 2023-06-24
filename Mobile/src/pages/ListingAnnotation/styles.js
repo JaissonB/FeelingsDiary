@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	labelDate: {
-		color: '#1E1E1E',
+		color: theme.color_dark5,
 		fontFamily: 'Inter-Bold',
 		fontSize: 14,
 	},
@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	labelTitle: {
-		color: '#1E1E1E',
+		color: theme.color_dark5,
 		fontFamily: 'Inter-Bold',
 		fontSize: 14,
 	},
 	labelAnotation: {
-		color: '#1E1E1E',
+		color: theme.color_dark5,
 		fontSize: 14,
 	},
 	addButton: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: '#5AB4FF',
+		backgroundColor: theme.color_primary1,
 	},
 	more: {
 		width: 30,

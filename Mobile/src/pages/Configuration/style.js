@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
 	safe: {
     height: "100%",
-		backgroundColor: '#FFFFFF',
+		backgroundColor: theme.color_white,
 	},
 });
 
