@@ -12,3 +12,18 @@ export default {
     "11": "novembro",
     "12": "dezembro",
 }
+
+export const shortDate = {
+    "Jan": "janeiro",
+    "Feb": "fevereiro",
+    "Mar": "março",
+    "Apr": "abril",
+    "May": "maio",
+    "Jun": "junho",
+    "Jul": "julho",
+    "Aug": "agosto",
+    "Sep": "setembro",
+    "Oct": "outubro",
+    "Nov": "novembro",
+    "Dec": "dezembro",
+}
