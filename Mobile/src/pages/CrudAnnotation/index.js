@@ -2,27 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View, } from "react-native";
 import Voice from "@react-native-voice/voice";
 import styles from "./styles";
-
-const NavigateComponent = () => {
-  return <>
-    <View style={styles.componenteNavegacao}>
-
-      <TouchableOpacity>
-        <Image
-          source={require('../../../assets/left.png')}
-          style={styles.arrow}
-        />
-      </TouchableOpacity>
-      <Text style={styles.textData}>19 fevereiro 2023</Text>
-      <TouchableOpacity>
-        <Image
-          source={require('../../../assets/right.png')}
-          style={styles.arrow}
-        />
-      </TouchableOpacity>
-    </View>
-  </>
-}
+import DatePickerComponent from "../../components/Datepicker";
+import api from "../../services/api";
+import { useNavigation } from "@react-navigation/native";
+import { stringToDate } from "../../services/dateType";
 
 const CrudAnnotation = () => {
   const [title, setTitle] = useState('');
@@ -30,6 +13,8 @@ const CrudAnnotation = () => {
   const [result, setResult] = useState('');
   const [audioError, setAudioError] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+  const navigation = useNavigation();
+  const [date, setDate] = useState(new Date());
 
   Voice.onSpeechStart = () => setIsRecording(true);
   Voice.onSpeechEnd = () => setIsRecording(false);
@@ -57,13 +42,30 @@ const CrudAnnotation = () => {
     }
   }
 
+  const createNote = async () => {
+    const body = {
+      title: title,
+      description: description,
+      date: stringToDate(date)
+    }
+    console.log(body)
+    await api.post("notes", body).then(response => {
+      console.log(response);
+      navigation.navigate("RoutesDrawer");
+    }).catch(error => {
+      console.error("CrudAnnotation Error", error.response.data);
+    });
+  }
+
   return <>
     <View style={styles.safe}>
       <View style={styles.ViewText}>
-        <NavigateComponent />
+        <View style={styles.componentNavigation}>
+          <DatePickerComponent setDate={(date) => setDate(date)} date={date} />
+        </View>
         <Text style={styles.textlabelField}>Título</Text>
         <TextInput
-          style={styles.inputTitle}
+          style={styles.inputText}
           placeholder="Digite um título..."
           value={title}
           onChangeText={setTitle}
@@ -71,7 +73,7 @@ const CrudAnnotation = () => {
 
         <Text style={styles.textlabelField}>Descrição</Text>
         <TextInput
-          style={styles.inputDescricao}
+          style={styles.inputText}
           placeholder="Digite uma descrição..."
           multiline={true}
           // numberOfLines={4} Fica com mais linhas mas o Imput quebra para baixo.
@@ -91,7 +93,7 @@ const CrudAnnotation = () => {
         <TouchableOpacity style={styles.button} onPress={() => { }}>
           <Text style={styles.buttonText}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonSave} onPress={() => { }}>
+        <TouchableOpacity style={styles.buttonSave} onPress={createNote}>
           <Text style={styles.buttonTextSave}>Salvar</Text>
         </TouchableOpacity>
       </View>

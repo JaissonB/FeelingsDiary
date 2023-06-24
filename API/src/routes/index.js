@@ -2,6 +2,7 @@ const cors = require('cors');
 const publicRoutes = require('./publicRoutes');
 const userRoutes = require('./userRoutes');
 const notesRoutes = require('./notesRoutes');
+const patientRoutes = require('./patientRoutes');
 const jwt = require('jsonwebtoken');
 
 module.exports = (app, express) => {
@@ -28,4 +29,5 @@ module.exports = (app, express) => {
 
     app.use(userRoutes);
     app.use(notesRoutes);
+    app.use(patientRoutes);
 }

@@ -27,19 +27,22 @@ class UserController {
 
             if (user.isProfessional) {
                 const professionalTag = service.createTag(user.id, user.completeName)
-                const newProfessional = await database.Professional.create({
+                await database.Professional.create({
                     user_id: user.id,
                     tag: professionalTag,
                     createdAt: new Date(),
                     updatedAt: new Date()
                 });
+                userDTO.tag = professionalTag;
             } else {
-                const newPatient = await database.Patient.create({
+                const professionalTag = userForm?.professionalTag || null;
+                await database.Patient.create({
                     user_id: user.id,
-                    tag: null,
+                    professionalTag: professionalTag,
                     createdAt: new Date(),
                     updatedAt: new Date()
                 });
+                userDTO.professionalTag = professionalTag;
             }
             return res.status(201).json(userDTO);
         } catch (error) {
@@ -59,11 +62,18 @@ class UserController {
             const user = await database.User.findByPk(userId);
             if(user == null) return res.status(404).json({ message: 'User not found' });
 
-            if (userForm.password) delete userForm.password;
+            // if (userForm.password) delete userForm.password;
+            if (userForm.password) userForm.password = bcrypt.hashSync(userForm.password, 10);
 
             await database.User.update(userForm, {
                 where: {
                     id: Number(userId)
+                }
+            })
+
+            if (!user.isProfessional && userForm?.professionalTag) await database.Patient.update(userForm, {
+                where: {
+                    user_id: userId
                 }
             })
             
@@ -76,10 +86,12 @@ class UserController {
     static async read(req, res) {
         try {
             const userId = req.userId;
+            let tag = null;
 
             if (userId.error) return res.status(401).json({ message: userId.error });
 
             const user = await database.User.findByPk(userId, {exclude: ['password']});
+
             if(user == null) return res.status(404).json({ message: 'User not found' });
 
             const responseData = {
@@ -87,6 +99,16 @@ class UserController {
                 completeName: user.completeName,
                 email: user.email,
                 isProfessional: user.isProfessional
+            }
+            
+            if (user.isProfessional) {
+                const professional = await database.Professional.findOne({where: { user_id: user.id }});
+                tag = professional?.tag;
+                responseData.tag = tag;
+            } else {
+                const patient = await database.Patient.findOne({where: { user_id: user.id }});
+                tag = patient?.professionalTag;
+                responseData.professionalTag = tag;
             }
 
             return res.status(200).json(responseData);
