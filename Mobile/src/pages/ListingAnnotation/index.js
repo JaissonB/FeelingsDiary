@@ -26,16 +26,21 @@ const ListingAnnotation = () => {
     });
   }
 
-  const DatailAnotation = () => {
-    navigation.navigate('CrudAnnotation');
+  const detailAnotation = (title, description, date, id) => {
+    navigation.navigate('CrudAnnotation', {
+      pTitle: title,
+      pDescription: description,
+      pDate: date,
+      pId: id
+    });
   };
 
-  const Item = ({ title, date, description }) => {
+  const Item = ({ title, date, description, id }) => {
     const day = date.substring(8, 10);
     const month = consts[date?.substring(5, 7)];
     const year = date.substring(0, 4);
     return <>
-      <TouchableOpacity onPress={() => { DatailAnotation() }}>
+      <TouchableOpacity onPress={() => { detailAnotation(title, description, date, id) }}>
         <View style={styles.itemList}>
           <View style={styles.RigthItem}>
             <Text style={styles.labelDate}>{day}</Text>
@@ -63,6 +68,7 @@ const ListingAnnotation = () => {
               title={item.title}
               date={item.date}
               description={item.description}
+              id={item.id}
             />
           }
         />
@@ -70,7 +76,7 @@ const ListingAnnotation = () => {
         <Text>Você não possui nenhum registro ainda...</Text>
         //Estilizar melhor este caso
       }
-      <TouchableOpacity style={styles.addButton} onPress={() => { DatailAnotation() }}>
+      <TouchableOpacity style={styles.addButton} onPress={() => { detailAnotation() }}>
         <Image source={add} style={styles.more} />
       </TouchableOpacity>
     </View>

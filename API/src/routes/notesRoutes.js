@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/notes', NotesController.storageNote);
 
-// router.post('/verifyCategory', NotesController.verifyCategory);
+router.put('/notes/:id', NotesController.update);
 
 router.get('/notes', NotesController.readAll);
 

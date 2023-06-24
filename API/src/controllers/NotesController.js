@@ -96,6 +96,33 @@ class NotesController {
         }
     }
 
+    static async update(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (id.error) return res.status(401).json({ message: id.error });
+            
+            const noteForm = req.body;
+            if (noteForm == null) return res.status(422).json({ message: 'Data not found' });
+
+            const note = await database.Note.findOne({ 
+                attributes: ['id', 'description', 'title'],
+                where: { id: id }
+            });
+            if(note == null) return res.status(404).json({ message: 'Note not found' });
+
+            await database.Note.update(noteForm, {
+                where: {
+                    id: Number(id)
+                }
+            })
+
+            return res.status(200).json({ message: `Note with ID ${id} updated` });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
 }
 
 module.exports = NotesController;
