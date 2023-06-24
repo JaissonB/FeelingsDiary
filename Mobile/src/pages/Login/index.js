@@ -28,7 +28,7 @@ const Login = () => {
       api.defaults.headers.common["authorization"] = `Bearer ${response.data.token}`;
       writeTokenToStorage(response.data.token, response.data.completeName, response.data.isProfessional.toString());
     }).catch(error => {
-      console.error(error.response);
+      console.error("Login Error", error.response);
     });
 
     return;

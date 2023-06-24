@@ -22,7 +22,7 @@ const ListingAnnotation = () => {
     }).then(response => {
       setNotes(response.data);
     }).catch(error => {
-      console.error(error.response);
+      console.error("ListingAnnotation Error", error.response);
     });
   }
 

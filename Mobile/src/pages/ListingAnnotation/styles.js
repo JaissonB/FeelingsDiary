@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 	},
 	leftItem: {
+		width: "75%",
 		marginHorizontal: 8,
 		justifyContent: 'center',
 	},

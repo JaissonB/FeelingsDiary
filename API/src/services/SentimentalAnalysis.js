@@ -1,18 +1,26 @@
 const Sentiment = require("sentiment");
+const translatte = require('translatte');
 
 class SentimentalAnalysis {
     
-    static verifySentiment(data) {
+    static async verifySentiment(data) {
+        let result;
+    
+        await translatte(data, {
+            from: 'pt',
+            to: 'en',
+        }).then(res => {
+            result = res.text;
+        }).catch(err => {
+            console.error(err);
+        });
+
         //Verifica se existe algum conteúdo no data.
-        console.log("description", data);
-        console.log();
-        if (!data.trim()) return;
-        let filterData = data.replace(/[^a-zA-Z ]/gi, '');
+        if (!result.trim()) return;
+        let filterData = result.replace(/[^a-zA-Z ]/gi, '');
         
         const sentimentInstance = new Sentiment();
         const analysis = sentimentInstance.analyze(filterData);
-        console.log("analysis", analysis);
-        console.log();
         const sentiment = {};
         //TODO Melhorar lógica de sentimento, fazer testes para saber se parece com a realidade
         sentiment.positive = analysis?.positive?.length;

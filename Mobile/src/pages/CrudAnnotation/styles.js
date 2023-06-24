@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
 	ViewText: {
 		// Componentes de texto
 	},
-	componenteNavegacao: {
+	componentNavigation: {
 		marginTop: 15,
 		marginBottom: 30,
 		paddingHorizontal: 8,
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	arrow: {
@@ -30,12 +30,13 @@ const styles = StyleSheet.create({
 	textlabelField: {
 		color: theme.color_dark5,
 		fontFamily: 'Inter-Bold',
-		fontSize: 15,
+		fontSize: 20,
 		paddingBottom: 3,
 		borderBottomWidth: 1,
 	},
-	inputTitle: {
+	inputText: {
 		marginBottom: "10%",
+		fontSize: 20
 	},
 	containerMicButton: {
 		width: "100%",
