@@ -8,6 +8,7 @@ import RoutesDrawer from './RoutesDrawer';
 import theme from '../theme';
 import RoutesDrawerProfessional from './RoutesDrawerProfessional';
 import ListingReports from '../pages/ListingReports';
+import Configuration from '../pages/Configuration';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,17 @@ const Routes = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RoutesDrawer" component={RoutesDrawer} />
         <Stack.Screen name="RoutesDrawerProfessional" component={RoutesDrawerProfessional} />
+        <Stack.Screen name="Configuration" component={Configuration}
+          options={{
+            headerShown: true,
+            headerTitleAlign: 'center',
+            title: "Registrar",
+            headerTintColor: theme.color_white,
+            headerStyle: {
+              backgroundColor: theme.color_primary1,
+            },
+          }}
+        />
         <Stack.Screen name="CrudAnnotation" component={CrudAnnotation}
           options={{
             headerShown: true,
@@ -27,9 +39,9 @@ const Routes = () => {
             headerStyle: {
               backgroundColor: theme.color_primary1,
             },
-          }} 
+          }}
         />
-        <Stack.Screen name="ListingReports" component={ListingReports} 
+        <Stack.Screen name="ListingReports" component={ListingReports}
           options={{
             headerShown: true,
             headerTitleAlign: 'center',

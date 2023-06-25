@@ -50,7 +50,7 @@ const RoutesDrawerProfessional = () => {
 
       <Drawer.Screen name="Configuration" component={Configuration}
         options={{
-          title: "Configurações",
+          title: "Cadastro",
           drawerIcon: () => {
             <AntDesign name="dashboard" size={20} color={theme.color_white} />
           }
