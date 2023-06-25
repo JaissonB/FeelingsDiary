@@ -67,9 +67,9 @@ const Login = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.registerText} onPress={handleRegister}>
-        Não tem uma conta? Registrar-se
-      </Text>
+      <TouchableOpacity onPress={handleRegister}>
+        <Text style={styles.registerText}>Não tem uma conta? Registre-se aqui.</Text>
+      </TouchableOpacity>
     </View>
   );
 };

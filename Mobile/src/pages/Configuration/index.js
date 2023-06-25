@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import styles from './style';
 import theme from '../../theme';
+import api from '../../services/api';
+import { useNavigation } from '@react-navigation/native';
+import { getStorageData } from '../../services/storage';
 
 const CheckBox = ({ option, stateCheck, toggle }) => {
   return <>
     <View>
       <View style={styles.optionContainer}>
         <TouchableOpacity style={styles.touchableOption} onPress={() => { toggle(!stateCheck) }}>
-          {stateCheck ?
-            <Image
-              source={require('../../../../Mobile/assets/checked.png')}
-              style={styles.checkImage}
-            /> :
+          {stateCheck &&
             <Image
               source={require('../../../../Mobile/assets/check.png')}
               style={styles.checkImage}
@@ -26,18 +25,64 @@ const CheckBox = ({ option, stateCheck, toggle }) => {
 }
 
 const Configuration = () => {
+  const navigation = useNavigation();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isProfessional, setIsProfessional] = useState(false);
-  const [professionalTag, setProfessionalTag] = useState('');
+  const [professionalTag, setProfessionalTag] = useState(null);
 
-  const [firstAccess, setFirstAccess] = useState(true);
+  const [isCreating, setIsCreating] = useState(true);
+
+  useEffect(() => {
+    async function verifyAuth() {
+      const auth = await getStorageData('TOKEN');
+      setIsCreating(!auth);
+      console.log(!auth)
+      if (!!auth) getLoggedUser();
+    }
+    verifyAuth();
+  }, []);
+
+  const getLoggedUser = async () => {
+    await api.get("users").then(response => {
+      console.log(response.data)
+      const data = response.data;
+      setFullName(data.completeName);
+      setEmail(data.email);
+      setPassword("*******");
+      setProfessionalTag(data.tag);
+      setIsProfessional(data.isProfessional);
+    }).catch(error => {
+      console.error("Login Error", error.response);
+    });
+  }
+
+  const registerUser = async () => {
+    const body = {
+      completeName: fullName,
+      email: email,
+      password: password,
+      isProfessional: isProfessional
+    }
+    if (!isProfessional) body.professionalTag = professionalTag;
+    await api.post("users", body).then(response => {
+      navigation.navigate("Login");
+    }).catch(error => {
+      console.error("Login Error", error.response);
+    });
+
+    return;
+  }
+
+  const updateUser = () => {
+
+  }
 
   return <>
     <View style={styles.safe}>
       <Image
-        source={require('../../../../Mobile/assets/logo.png')}
+        source={require('../../../assets/logo.png')}
         style={styles.logo}
       />
       <TextInput
@@ -65,34 +110,48 @@ const Configuration = () => {
         value={password}
         secureTextEntry
       />
-      {firstAccess ?
+      {isCreating ?
         <View style={styles.professional}>
           <View style={styles.check}>
             <CheckBox option={'Sou um Profissional'} stateCheck={isProfessional} toggle={setIsProfessional} />
           </View>
-          <TextInput
-            id="professionalTag"
-            placeholderTextColor={theme.color_black}
-            style={styles.inputTag}
-            placeholder="Tag do Profissional"
-            onChangeText={text => setProfessionalTag(text)}
-            value={professionalTag}
-          />
-        </View> :
+          {!isProfessional &&
+            <TextInput
+              id="professionalTag"
+              placeholderTextColor={theme.color_black}
+              style={styles.inputTag}
+              placeholder="Tag do Profissional (opcional)"
+              onChangeText={text => setProfessionalTag(text)}
+              value={professionalTag}
+            />
+          }
+        </View>
+        :
         <View style={styles.professional}>
-          <TextInput
-            id="professionalTag"
-            placeholderTextColor={theme.color_black}
-            style={styles.inputTag}
-            placeholder="Tag do Profissional"
-            onChangeText={text => setProfessionalTag(text)}
-            value={professionalTag}
-            editable={!isProfessional}
-          />
+          {isProfessional ?
+            <TouchableOpacity>
+              <TextInput
+                id="professionalTag"
+                placeholderTextColor={theme.color_dark15}
+                style={styles.inputTagProfessional}
+                placeholder="Tag do Profissional"
+                value={professionalTag}
+                editable={false}
+              />
+            </TouchableOpacity>
+            :
+            <TextInput
+              id="professionalTag"
+              placeholderTextColor={theme.color_black}
+              style={styles.inputTag}
+              placeholder="Tag do Profissional"
+              value={professionalTag}
+            />
+          }
         </View>
       }
-      <TouchableOpacity style={styles.buttonSave} onPress={() => { }}>
-        <Text style={styles.buttonTextSave}>{firstAccess ? 'Registrar' : 'Salvar'}</Text>
+      <TouchableOpacity style={styles.buttonSave} onPress={isCreating ? registerUser : updateUser}>
+        <Text style={styles.buttonTextSave}>{isCreating ? 'Registrar' : 'Salvar'}</Text>
       </TouchableOpacity>
     </View>
   </>
