@@ -123,6 +123,37 @@ class NotesController {
         }
     }
 
+    static async readNotesByPatient(req, res) {
+        try {
+            const { id } = req.params;
+            const notes = await database.Note.findAll({
+                attributes: ['id', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
+                where: { patient_id: id },
+                order: [['date', 'DESC']]
+            });
+
+            let allNotes = [];
+
+            notes.forEach(note => {
+                let noteData = {};
+            
+                noteData.id = note.id;
+                noteData.title = note.title;
+                noteData.date = note.date;
+                noteData.positive = note.positive;
+                noteData.negative = note.negative;
+                noteData.neutral = note.neutral;
+                noteData.sentiment = note.sentiment;
+                
+                allNotes.push(noteData);
+            });
+
+            return res.status(200).send(allNotes);
+        } catch (error) {
+            return res.status(500).send({ message: error.message })
+        }
+    }
+
 }
 
 module.exports = NotesController;

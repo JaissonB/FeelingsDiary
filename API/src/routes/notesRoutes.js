@@ -11,4 +11,6 @@ router.get('/notes', NotesController.readAll);
 
 router.get('/notes/:id', NotesController.readNote);
 
+router.get('/patient/:id/notes', NotesController.readNotesByPatient);
+
 module.exports = router;
