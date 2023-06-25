@@ -5,7 +5,7 @@ class SentimentalAnalysis {
     
     static async verifySentiment(data) {
         let result;
-    
+
         await translatte(data, {
             from: 'pt',
             to: 'en',

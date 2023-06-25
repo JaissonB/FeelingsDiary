@@ -12,8 +12,8 @@ class NotesController {
             }});
             let note;
             if (!dataForm.note_id || dataForm.note_id == null) {
-                const sentiments = analyzerService.verifySentiment(dataForm.description);
-                const noteForm = {
+                const sentiments = await analyzerService.verifySentiment(dataForm.description);
+                const noteForm = await {
                     ...dataForm,
                     ...sentiments,
                     patient_id: patient.id
@@ -91,6 +91,64 @@ class NotesController {
             }
 
             return res.status(200).send(responseData);
+        } catch (error) {
+            return res.status(500).send({ message: error.message })
+        }
+    }
+
+    static async update(req, res) {
+        try {
+            const { id } = req.params;
+
+            if (id.error) return res.status(401).json({ message: id.error });
+            
+            const noteForm = req.body;
+            if (noteForm == null) return res.status(422).json({ message: 'Data not found' });
+
+            const note = await database.Note.findOne({ 
+                attributes: ['id', 'description', 'title'],
+                where: { id: id }
+            });
+            if(note == null) return res.status(404).json({ message: 'Note not found' });
+
+            await database.Note.update(noteForm, {
+                where: {
+                    id: Number(id)
+                }
+            })
+
+            return res.status(200).json({ message: `Note with ID ${id} updated` });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
+    static async readNotesByPatient(req, res) {
+        try {
+            const { id } = req.params;
+            const notes = await database.Note.findAll({
+                attributes: ['id', 'title', 'date', 'positive', 'negative', 'neutral', 'sentiment'],
+                where: { patient_id: id },
+                order: [['date', 'DESC']]
+            });
+
+            let allNotes = [];
+
+            notes.forEach(note => {
+                let noteData = {};
+            
+                noteData.id = note.id;
+                noteData.title = note.title;
+                noteData.date = note.date;
+                noteData.positive = note.positive;
+                noteData.negative = note.negative;
+                noteData.neutral = note.neutral;
+                noteData.sentiment = note.sentiment;
+                
+                allNotes.push(noteData);
+            });
+
+            return res.status(200).send(allNotes);
         } catch (error) {
             return res.status(500).send({ message: error.message })
         }

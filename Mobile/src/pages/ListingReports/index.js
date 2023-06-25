@@ -1,46 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
-import add from "../../../assets/add.png";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
 import { getStorageData } from "../../services/storage";
 import consts from "../../consts";
 
-const ListingAnnotation = () => {
+const ListingReports = ({ route }) => {
   const navigation = useNavigation();
-  const [notes, setNotes] = useState([]);
+  const [reports, setReports] = useState([]);
+  const { patientId, completeName } = route?.params;
 
   useEffect(() => {
-    getNotes();
-  }, [])
+    getReports();
+  }, [route])
 
-  const getNotes = async () => {
+  const getReports = async () => {
     const auth = await getStorageData('TOKEN');
-    await api.get("notes", {
+    await api.get(`patient/${patientId}/notes`, {
       headers: { "authorization": auth },
     }).then(response => {
-      setNotes(response.data);
+      setReports(response.data);
     }).catch(error => {
-      console.error("ListingAnnotation Error", error.response);
+      console.error("ListingReports Error", error.response);
     });
   }
 
-  const detailAnotation = (title, description, date, id) => {
-    navigation.navigate('CrudAnnotation', {
-      pTitle: title,
-      pDescription: description,
-      pDate: date,
-      pId: id
-    });
-  };
-
-  const Item = ({ title, date, description, id }) => {
+  const Item = ({ id, date, title, sentiment }) => {
     const day = date.substring(8, 10);
     const month = consts[date?.substring(5, 7)];
     const year = date.substring(0, 4);
+    const emoji = sentiment === "positive" ? require("../../../assets/positiveFeel.png") :
+    sentiment === "negative" ? require("../../../assets/negativeFeel.png") : require("../../../assets/neutralFeel.png");
     return <>
-      <TouchableOpacity onPress={() => { detailAnotation(title, description, date, id) }}>
+      <TouchableOpacity onPress={() => {  }}>
         <View style={styles.itemList}>
           <View style={styles.RigthItem}>
             <Text style={styles.labelDate}>{day}</Text>
@@ -49,7 +42,9 @@ const ListingAnnotation = () => {
           </View>
           <View style={styles.leftItem}>
             <Text style={styles.labelTitle}>{title}</Text>
-            <Text style={styles.labelAnotation}>{description}</Text>
+          </View>
+          <View style={styles.emojiItem}>
+            <Image source={emoji} style={{ width: 25, height: 25 }} />
           </View>
         </View>
       </TouchableOpacity>
@@ -58,17 +53,17 @@ const ListingAnnotation = () => {
 
   return <>
     <View style={styles.safe}>
-      {notes ?
+      {reports ?
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={notes}
+          data={reports}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) =>
             <Item
-              title={item.title}
-              date={item.date}
-              description={item.description}
               id={item.id}
+              date={item.date}
+              title={item.title}
+              sentiment={item.sentiment}
             />
           }
         />
@@ -76,11 +71,11 @@ const ListingAnnotation = () => {
         <Text>Você não possui nenhum registro ainda...</Text>
         //Estilizar melhor este caso
       }
-      <TouchableOpacity style={styles.addButton} onPress={() => { detailAnotation() }}>
+      {/* <TouchableOpacity style={styles.addButton} onPress={() => {  }}>
         <Image source={add} style={styles.more} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   </>
 }
 
-export default ListingAnnotation;
+export default ListingReports;

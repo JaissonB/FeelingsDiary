@@ -12,7 +12,7 @@ const DatePickerComponent = (props) => {
         <TouchableOpacity onPress={() => setOpen(true)} style={styles.button}>
             <Image source={require('../../../assets/calendar.png')} style={styles.buttonImage} />
             <Text style={styles.buttonText}>
-                {dateToString(props.date)}
+              {dateToString(props.date) || dateToString(new Date())}
             </Text>
         </TouchableOpacity>
         <DatePicker

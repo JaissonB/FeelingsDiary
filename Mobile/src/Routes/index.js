@@ -6,6 +6,8 @@ import Login from '../pages/Login';
 import CrudAnnotation from '../pages/CrudAnnotation';
 import RoutesDrawer from './RoutesDrawer';
 import theme from '../theme';
+import RoutesDrawerProfessional from './RoutesDrawerProfessional';
+import ListingReports from '../pages/ListingReports';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,7 @@ const Routes = () => {
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RoutesDrawer" component={RoutesDrawer} />
+        <Stack.Screen name="RoutesDrawerProfessional" component={RoutesDrawerProfessional} />
         <Stack.Screen name="CrudAnnotation" component={CrudAnnotation}
           options={{
             headerShown: true,
@@ -24,7 +27,19 @@ const Routes = () => {
             headerStyle: {
               backgroundColor: theme.color_primary1,
             },
-          }} />
+          }} 
+        />
+        <Stack.Screen name="ListingReports" component={ListingReports} 
+          options={{
+            headerShown: true,
+            headerTitleAlign: 'center',
+            title: "Relatórios",
+            headerTintColor: theme.color_white,
+            headerStyle: {
+              backgroundColor: theme.color_primary1,
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   </>

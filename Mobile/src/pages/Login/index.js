@@ -24,7 +24,9 @@ const Login = () => {
       password: password,
     }
     await api.post("authenticate", body).then(response => {
-      navigation.navigate("RoutesDrawer");
+      response.data.isProfessional ?
+      navigation.navigate("RoutesDrawerProfessional") :
+      navigation.navigate("RoutesDrawer") 
       api.defaults.headers.common["authorization"] = `Bearer ${response.data.token}`;
       writeTokenToStorage(response.data.token, response.data.completeName, response.data.isProfessional.toString());
     }).catch(error => {

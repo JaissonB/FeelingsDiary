@@ -7,14 +7,16 @@ import api from "../../services/api";
 import { useNavigation } from "@react-navigation/native";
 import { stringToDate } from "../../services/dateType";
 
-const CrudAnnotation = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+const CrudAnnotation = ({ route }) => {
+  const { pTitle, pDescription, pDate, pId } = route?.params;
+  const [title, setTitle] = useState(pTitle || '');
+  const [description, setDescription] = useState(pDescription || '');
   const [result, setResult] = useState('');
   const [audioError, setAudioError] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const navigation = useNavigation();
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(pDate ? new Date(pDate) : new Date());
+  const isEditing = !!route?.params?.pId;
 
   Voice.onSpeechStart = () => setIsRecording(true);
   Voice.onSpeechEnd = () => setIsRecording(false);
@@ -24,7 +26,7 @@ const CrudAnnotation = () => {
   useEffect(() => {
     const newDescription = description.trim() ? description + ". " + result : result;
     setDescription(newDescription);
-  }, [result])
+  }, [result, route])
 
   const startRecording = async () => {
     try {
@@ -48,9 +50,20 @@ const CrudAnnotation = () => {
       description: description,
       date: stringToDate(date)
     }
-    console.log(body)
     await api.post("notes", body).then(response => {
-      console.log(response);
+      navigation.navigate("RoutesDrawer");
+    }).catch(error => {
+      console.error("CrudAnnotation Error", error.response.data);
+    });
+  }
+
+  const editNote = async () => {
+    const body = {
+      title: title,
+      description: description,
+      date: stringToDate(date)
+    }
+    await api.put(`notes/${pId}`, body).then(response => {
       navigation.navigate("RoutesDrawer");
     }).catch(error => {
       console.error("CrudAnnotation Error", error.response.data);
@@ -93,7 +106,7 @@ const CrudAnnotation = () => {
         <TouchableOpacity style={styles.button} onPress={() => { }}>
           <Text style={styles.buttonText}>Cancelar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonSave} onPress={createNote}>
+        <TouchableOpacity style={styles.buttonSave} onPress={isEditing ? editNote : createNote}>
           <Text style={styles.buttonTextSave}>Salvar</Text>
         </TouchableOpacity>
       </View>
