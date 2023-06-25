@@ -7,10 +7,28 @@ module.exports = {
     await queryInterface.bulkInsert('Patients', [
       {
         user_id: 2,
-        professionalTag: '1234567',
+        professionalTag: '68973',
         createdAt: new Date(),
         updatedAt: new Date()
-      }
+      },
+      {
+        user_id: 4,
+        professionalTag: '68973',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 5,
+        professionalTag: '68973',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id: 6,
+        professionalTag: '68973',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {});
   },
 
