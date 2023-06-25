@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		justifyContent: "center",
 		position: "absolute",
-		bottom: 150,
+		bottom: 130,
 		right: 0,
 		left: 20
 	},
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 	viewButtons: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		marginBottom: 80,
+		marginBottom: 50,
 	},
 	button: {
 		width: '40%',

@@ -73,8 +73,9 @@ const ListingAnnotation = () => {
           }
         />
         :
-        <Text>Você não possui nenhum registro ainda...</Text>
-        //Estilizar melhor este caso
+        <View style={styles.emptyList}>
+            <Text style={styles.textEmptyList}>{`Você ainda não possui nenhuma anotação.`}</Text>
+        </View>
       }
       <TouchableOpacity style={styles.addButton} onPress={() => { detailAnotation() }}>
         <Image source={add} style={styles.more} />

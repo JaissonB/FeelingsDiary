@@ -53,7 +53,7 @@ const ListingReports = ({ route }) => {
 
   return <>
     <View style={styles.safe}>
-      {reports ?
+      {reports?.length ?
         <FlatList
           showsVerticalScrollIndicator={false}
           data={reports}
@@ -68,7 +68,9 @@ const ListingReports = ({ route }) => {
           }
         />
         :
-        <Text>Você não possui nenhum registro ainda...</Text>
+        <View style={styles.emptyList}>
+            <Text style={styles.textEmptyList}>{`${completeName} ainda não possui nenhum registro.`}</Text>
+        </View>
         //Estilizar melhor este caso
       }
       {/* <TouchableOpacity style={styles.addButton} onPress={() => {  }}>
