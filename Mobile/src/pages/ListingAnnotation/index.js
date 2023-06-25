@@ -39,6 +39,7 @@ const ListingAnnotation = () => {
     const day = date.substring(8, 10);
     const month = consts[date?.substring(5, 7)];
     const year = date.substring(0, 4);
+    const descriptionPresentation = description.substring(0, 80) + ' ...'; 
     return <>
       <TouchableOpacity onPress={() => { detailAnotation(title, description, date, id) }}>
         <View style={styles.itemList}>
@@ -49,7 +50,7 @@ const ListingAnnotation = () => {
           </View>
           <View style={styles.leftItem}>
             <Text style={styles.labelTitle}>{title}</Text>
-            <Text style={styles.labelAnotation}>{description}</Text>
+            <Text style={styles.labelAnotation}>{descriptionPresentation}</Text>
           </View>
         </View>
       </TouchableOpacity>

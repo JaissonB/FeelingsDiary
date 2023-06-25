@@ -38,7 +38,7 @@ const Login = () => {
 
   const handleRegister = () => {
     // Lógica de registro aqui
-    console.log('Registrando...');
+    navigation.navigate("Configuration"); 
   };
 
   return (
