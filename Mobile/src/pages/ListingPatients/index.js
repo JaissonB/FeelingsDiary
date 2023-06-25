@@ -7,7 +7,6 @@ import chevron from "../../../assets/chevron.png";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
 import { getStorageData } from "../../services/storage";
-import consts from "../../consts";
 
 const ListingPatients = () => {
   const navigation = useNavigation();
@@ -28,18 +27,9 @@ const ListingPatients = () => {
     });
   }
 
-//   const detailAnotation = (title, description, date, id) => {
-//     navigation.navigate('CrudAnnotation', {
-//       pTitle: title,
-//       pDescription: description,
-//       pDate: date,
-//       pId: id
-//     });
-//   };
-
   const Item = ({ patientId, completeName }) => {
     return <>
-      <TouchableOpacity onPress={() => { }}>
+      <TouchableOpacity onPress={() => navigation.navigate("ListingReports", { patientId: patientId, completeName: completeName })}>
         <View style={styles.itemList}>
           <View style={styles.RigthItem}>
             <Image source={profile} />
@@ -48,7 +38,7 @@ const ListingPatients = () => {
             <Text style={styles.labelTitle}>{completeName}</Text>
           </View>
           <View style={styles.leftItem}>
-            <Image source={chevron} style={{ width: 25, height: 25 }}/>
+            <Image source={chevron} style={{ width: 25, height: 25 }} />
           </View>
         </View>
       </TouchableOpacity>

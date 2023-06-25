@@ -7,6 +7,7 @@ import CrudAnnotation from '../pages/CrudAnnotation';
 import RoutesDrawer from './RoutesDrawer';
 import theme from '../theme';
 import RoutesDrawerProfessional from './RoutesDrawerProfessional';
+import ListingReports from '../pages/ListingReports';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,19 @@ const Routes = () => {
             headerStyle: {
               backgroundColor: theme.color_primary1,
             },
-          }} />
+          }} 
+        />
+        <Stack.Screen name="ListingReports" component={ListingReports} 
+          options={{
+            headerShown: true,
+            headerTitleAlign: 'center',
+            title: "Relatórios",
+            headerTintColor: theme.color_white,
+            headerStyle: {
+              backgroundColor: theme.color_primary1,
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   </>
