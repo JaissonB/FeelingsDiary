@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import CrudAnnotation from '../pages/CrudAnnotation';
 import RoutesDrawer from './RoutesDrawer';
 import theme from '../theme';
+import RoutesDrawerProfessional from './RoutesDrawerProfessional';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ const Routes = () => {
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="RoutesDrawer" component={RoutesDrawer} />
+        <Stack.Screen name="RoutesDrawerProfessional" component={RoutesDrawerProfessional} />
         <Stack.Screen name="CrudAnnotation" component={CrudAnnotation}
           options={{
             headerShown: true,
