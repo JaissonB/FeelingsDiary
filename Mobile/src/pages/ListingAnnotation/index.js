@@ -12,7 +12,9 @@ const ListingAnnotation = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    getNotes();
+    navigation.addListener('focus', async () => {
+      await getNotes();
+    })
   }, [])
 
   const getNotes = async () => {
@@ -59,7 +61,7 @@ const ListingAnnotation = () => {
 
   return <>
     <View style={styles.safe}>
-      {notes ?
+      {notes?.length ?
         <FlatList
           showsVerticalScrollIndicator={false}
           data={notes}

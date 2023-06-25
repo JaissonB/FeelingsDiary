@@ -38,7 +38,6 @@ const Configuration = () => {
     async function verifyAuth() {
       const auth = await getStorageData('TOKEN');
       setIsCreating(!auth);
-      console.log(!auth)
       if (!!auth) getLoggedUser();
     }
     verifyAuth();

@@ -51,7 +51,7 @@ const CrudAnnotation = ({ route }) => {
       date: stringToDate(date)
     }
     await api.post("notes", body).then(response => {
-      navigation.navigate("RoutesDrawer");
+      navigation.navigate("ListingAnnotation");
     }).catch(error => {
       console.error("CrudAnnotation Error", error.response.data);
     });
@@ -64,7 +64,7 @@ const CrudAnnotation = ({ route }) => {
       date: stringToDate(date)
     }
     await api.put(`notes/${pId}`, body).then(response => {
-      navigation.navigate("RoutesDrawer");
+      navigation.navigate("ListingAnnotation");
     }).catch(error => {
       console.error("CrudAnnotation Error", error.response.data);
     });
@@ -76,7 +76,11 @@ const CrudAnnotation = ({ route }) => {
         <View style={styles.componentNavigation}>
           <DatePickerComponent setDate={(date) => setDate(date)} date={date} />
         </View>
-        <Text style={styles.textlabelField}>Título</Text>
+        <View>
+          <Text style={styles.textlabelField}>
+            Título <Text style={{fontSize: 12}}>(Poderá ser visto pelo profissional)</Text>
+          </Text>
+        </View>
         <TextInput
           style={styles.inputText}
           placeholder="Digite um título..."
