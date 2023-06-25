@@ -12,8 +12,8 @@ class NotesController {
             }});
             let note;
             if (!dataForm.note_id || dataForm.note_id == null) {
-                const sentiments = analyzerService.verifySentiment(dataForm.description);
-                const noteForm = {
+                const sentiments = await analyzerService.verifySentiment(dataForm.description);
+                const noteForm = await {
                     ...dataForm,
                     ...sentiments,
                     patient_id: patient.id
