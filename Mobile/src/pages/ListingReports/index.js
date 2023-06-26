@@ -35,7 +35,7 @@ const ListingReports = ({ route }) => {
     return <>
       <TouchableOpacity 
         onPress={() => navigation.navigate("ReportScreen", {
-          date, title, sentiment, positive, negative, neutral
+          date, title, sentiment, positive, negative, neutral, completeName
         })}
       >
         <View style={styles.itemList}>

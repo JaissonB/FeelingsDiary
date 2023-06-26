@@ -4,7 +4,7 @@ import styles from './style';
 import theme from '../../theme';
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
-import { getStorageData } from '../../services/storage';
+import { getStorageData, setStorageData } from '../../services/storage';
 
 const CheckBox = ({ option, stateCheck, toggle }) => {
   return <>
@@ -52,7 +52,7 @@ const Configuration = () => {
       isProfessional ? setProfessionalTag(data.tag) : setProfessionalTag(data.professionalTag);
       setIsProfessional(data.isProfessional);
     }).catch(error => {
-      console.error("Login Error", error.response);
+      console.error("Configuration Error", error.response);
     });
   }
 

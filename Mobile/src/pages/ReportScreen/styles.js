@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     emoji: {
-        width: 200,
-        height: 200
+        width: 100,
+        height: 100
     },
     textDesc: {
         fontSize: 17,
@@ -30,6 +30,16 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         maxWidth: 250,
         textAlign: "center"
+    },
+    viewChart: { 
+        height:300,
+        width: 300,
+        marginVertical: 25,
+        flexDirection: "row"
+    },
+    textExplain: {
+        fontSize: 14,
+        textAlign: "center",
     }
 });
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './style';
 import { setStorageData } from "../../services/storage";
@@ -11,6 +11,13 @@ const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    async function cleanCache() {
+      await setStorageData("TOKEN", "");
+    }
+    cleanCache();
+  }, [])
   
   const writeTokenToStorage = async (token, name, flag) => {
     await setStorageData("TOKEN", token);
