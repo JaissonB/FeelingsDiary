@@ -25,7 +25,7 @@ class SentimentalAnalysis {
         //TODO Melhorar lógica de sentimento, fazer testes para saber se parece com a realidade
         sentiment.positive = analysis?.positive?.length;
         sentiment.negative = analysis?.negative?.length;
-        sentiment.neutral = analysis?.words?.length - sentiment?.positive - sentiment?.negative;
+        sentiment.neutral = analysis?.tokens?.length - sentiment?.positive - sentiment?.negative;
         sentiment.sentiment = analysis?.score > 5 ? 'positive' : analysis?.score < 0 ? 'negative' : 'neutral';
         
         return sentiment;

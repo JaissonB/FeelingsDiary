@@ -26,14 +26,18 @@ const ListingReports = ({ route }) => {
     });
   }
 
-  const Item = ({ id, date, title, sentiment }) => {
+  const Item = ({ id, date, title, sentiment, positive, negative, neutral }) => {
     const day = date.substring(8, 10);
     const month = consts[date?.substring(5, 7)];
     const year = date.substring(0, 4);
     const emoji = sentiment === "positive" ? require("../../../assets/positiveFeel.png") :
     sentiment === "negative" ? require("../../../assets/negativeFeel.png") : require("../../../assets/neutralFeel.png");
     return <>
-      <TouchableOpacity onPress={() => {  }}>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate("ReportScreen", {
+          date, title, sentiment, positive, negative, neutral
+        })}
+      >
         <View style={styles.itemList}>
           <View style={styles.RigthItem}>
             <Text style={styles.labelDate}>{day}</Text>
@@ -64,6 +68,9 @@ const ListingReports = ({ route }) => {
               date={item.date}
               title={item.title}
               sentiment={item.sentiment}
+              positive={item.positive}
+              negative={item.negative}
+              neutral={item.neutral}
             />
           }
         />
@@ -71,7 +78,6 @@ const ListingReports = ({ route }) => {
         <View style={styles.emptyList}>
             <Text style={styles.textEmptyList}>{`${completeName} ainda não possui nenhum registro.`}</Text>
         </View>
-        //Estilizar melhor este caso
       }
       {/* <TouchableOpacity style={styles.addButton} onPress={() => {  }}>
         <Image source={add} style={styles.more} />

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './style';
-import { setStorageData, getStorageData } from "../../services/storage";
+import { setStorageData } from "../../services/storage";
 
 import { useNavigation } from "@react-navigation/native";
 import api from '../../services/api';

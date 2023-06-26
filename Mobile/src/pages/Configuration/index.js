@@ -45,12 +45,11 @@ const Configuration = () => {
 
   const getLoggedUser = async () => {
     await api.get("users").then(response => {
-      console.log(response.data)
       const data = response.data;
       setFullName(data.completeName);
       setEmail(data.email);
       setPassword("*******");
-      setProfessionalTag(data.tag);
+      isProfessional ? setProfessionalTag(data.tag) : setProfessionalTag(data.professionalTag);
       setIsProfessional(data.isProfessional);
     }).catch(error => {
       console.error("Login Error", error.response);
@@ -68,14 +67,28 @@ const Configuration = () => {
     await api.post("users", body).then(response => {
       navigation.navigate("Login");
     }).catch(error => {
-      console.error("Login Error", error.response);
+      console.error("Cadastre Error", error.response);
     });
 
     return;
   }
 
-  const updateUser = () => {
+  const updateUser = async () => {
+    const body = {
+      completeName: fullName,
+      email: email,
+    }
+    if (password !== "*******") body.password = password;
+    if (!isProfessional) body.professionalTag = professionalTag;
+    await api.put("users", body).then(response => {
+      isProfessional ?
+      navigation.navigate("ListingPatients") :
+      navigation.navigate("ListingAnnotation");
+    }).catch(error => {
+      console.error("Cadastre Error", error.response);
+    });
 
+    return;
   }
 
   return <>
@@ -144,6 +157,7 @@ const Configuration = () => {
               placeholderTextColor={theme.color_black}
               style={styles.inputTag}
               placeholder="Tag do Profissional"
+              onChangeText={text => setProfessionalTag(text)}
               value={professionalTag}
             />
           }

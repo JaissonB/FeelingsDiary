@@ -9,6 +9,7 @@ import theme from '../theme';
 import RoutesDrawerProfessional from './RoutesDrawerProfessional';
 import ListingReports from '../pages/ListingReports';
 import Configuration from '../pages/Configuration';
+import ReportScreen from '../pages/ReportScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,17 @@ const Routes = () => {
             headerShown: true,
             headerTitleAlign: 'center',
             title: "Relatórios",
+            headerTintColor: theme.color_white,
+            headerStyle: {
+              backgroundColor: theme.color_primary1,
+            },
+          }}
+        />
+        <Stack.Screen name="ReportScreen" component={ReportScreen}
+          options={{
+            headerShown: true,
+            headerTitleAlign: 'center',
+            title: "Relatório do dia",
             headerTintColor: theme.color_white,
             headerStyle: {
               backgroundColor: theme.color_primary1,
