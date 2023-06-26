@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Notes.init({
     date: DataTypes.DATE,
-    description: DataTypes.STRING,//TODO Descobrir como aumentar o tamanho do texto...
+    description: DataTypes.STRING(1094),
     title: DataTypes.STRING,
     positive: DataTypes.FLOAT,
     negative: DataTypes.FLOAT,
