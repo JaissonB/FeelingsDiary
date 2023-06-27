@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View, } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView } from "react-native";
 import Voice from "@react-native-voice/voice";
 import styles from "./styles";
 import DatePickerComponent from "../../components/Datepicker";
@@ -71,7 +71,7 @@ const CrudAnnotation = ({ route }) => {
   }
 
   return <>
-    <View style={styles.safe}>
+    <KeyboardAvoidingView contentContainerStyle={styles.safe} behavior="height" enabled >
       <View style={styles.ViewText}>
         <View style={styles.componentNavigation}>
           <DatePickerComponent setDate={(date) => setDate(date)} date={date} />
@@ -89,14 +89,16 @@ const CrudAnnotation = ({ route }) => {
         />
 
         <Text style={styles.textlabelField}>Descrição</Text>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Digite uma descrição..."
-          multiline={true}
-          // numberOfLines={4} Fica com mais linhas mas o Imput quebra para baixo.
-          value={description}
-          onChangeText={setDescription}
-        />
+        <View style={styles.viewInputDesc}>
+          <TextInput
+            style={styles.inputTextDesc}
+            placeholder="Digite uma descrição..."
+            multiline={true}
+            // numberOfLines={4} Fica com mais linhas mas o Imput quebra para baixo.
+            value={description}
+            onChangeText={setDescription}
+          />
+        </View>
       </View>
 
       <View style={styles.containerMicButton}>
@@ -107,14 +109,14 @@ const CrudAnnotation = ({ route }) => {
       </View>
 
       <View style={styles.viewButtons}>
-        <TouchableOpacity style={styles.button} onPress={() => { }}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ListingAnnotation")}>
           <Text style={styles.buttonText}>Cancelar</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonSave} onPress={isEditing ? editNote : createNote}>
           <Text style={styles.buttonTextSave}>Salvar</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   </>
 }
 
