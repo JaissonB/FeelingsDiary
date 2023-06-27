@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './style';
-import { setStorageData, getStorageData } from "../../services/storage";
+import { setStorageData } from "../../services/storage";
 
 import { useNavigation } from "@react-navigation/native";
 import api from '../../services/api';
@@ -11,6 +11,13 @@ const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    async function cleanCache() {
+      await setStorageData("TOKEN", "");
+    }
+    cleanCache();
+  }, [])
   
   const writeTokenToStorage = async (token, name, flag) => {
     await setStorageData("TOKEN", token);
@@ -67,9 +74,9 @@ const Login = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.registerText} onPress={handleRegister}>
-        Não tem uma conta? Registrar-se
-      </Text>
+      <TouchableOpacity onPress={handleRegister}>
+        <Text style={styles.registerText}>Não tem uma conta? Registre-se aqui.</Text>
+      </TouchableOpacity>
     </View>
   );
 };

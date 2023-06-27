@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View, } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView } from "react-native";
 import Voice from "@react-native-voice/voice";
 import styles from "./styles";
 import DatePickerComponent from "../../components/Datepicker";
@@ -51,7 +51,7 @@ const CrudAnnotation = ({ route }) => {
       date: stringToDate(date)
     }
     await api.post("notes", body).then(response => {
-      navigation.navigate("RoutesDrawer");
+      navigation.navigate("ListingAnnotation");
     }).catch(error => {
       console.error("CrudAnnotation Error", error.response.data);
     });
@@ -64,19 +64,23 @@ const CrudAnnotation = ({ route }) => {
       date: stringToDate(date)
     }
     await api.put(`notes/${pId}`, body).then(response => {
-      navigation.navigate("RoutesDrawer");
+      navigation.navigate("ListingAnnotation");
     }).catch(error => {
       console.error("CrudAnnotation Error", error.response.data);
     });
   }
 
   return <>
-    <View style={styles.safe}>
+    <KeyboardAvoidingView contentContainerStyle={styles.safe} behavior="height" enabled >
       <View style={styles.ViewText}>
         <View style={styles.componentNavigation}>
           <DatePickerComponent setDate={(date) => setDate(date)} date={date} />
         </View>
-        <Text style={styles.textlabelField}>Título</Text>
+        <View>
+          <Text style={styles.textlabelField}>
+            Título <Text style={{fontSize: 12}}>(Poderá ser visto pelo profissional)</Text>
+          </Text>
+        </View>
         <TextInput
           style={styles.inputText}
           placeholder="Digite um título..."
@@ -85,14 +89,16 @@ const CrudAnnotation = ({ route }) => {
         />
 
         <Text style={styles.textlabelField}>Descrição</Text>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Digite uma descrição..."
-          multiline={true}
-          // numberOfLines={4} Fica com mais linhas mas o Imput quebra para baixo.
-          value={description}
-          onChangeText={setDescription}
-        />
+        <View style={styles.viewInputDesc}>
+          <TextInput
+            style={styles.inputTextDesc}
+            placeholder="Digite uma descrição..."
+            multiline={true}
+            // numberOfLines={4} Fica com mais linhas mas o Imput quebra para baixo.
+            value={description}
+            onChangeText={setDescription}
+          />
+        </View>
       </View>
 
       <View style={styles.containerMicButton}>
@@ -103,14 +109,14 @@ const CrudAnnotation = ({ route }) => {
       </View>
 
       <View style={styles.viewButtons}>
-        <TouchableOpacity style={styles.button} onPress={() => { }}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ListingAnnotation")}>
           <Text style={styles.buttonText}>Cancelar</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonSave} onPress={isEditing ? editNote : createNote}>
           <Text style={styles.buttonTextSave}>Salvar</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   </>
 }
 

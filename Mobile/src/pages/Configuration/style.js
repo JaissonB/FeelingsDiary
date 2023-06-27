@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 		backgroundColor: theme.color_white,
 	},
 	logo: {
-		width: 100,
+		width: 81.5,
 		height: 100,
 		marginTop: 30,
 		marginBottom: 50,
@@ -47,6 +47,18 @@ const styles = StyleSheet.create({
 		borderColor: theme.color_black,
 		borderRadius: 24,
 	},
+	inputTagProfessional: {
+		color: theme.color_dark15,
+		borderColor: theme.color_dark15,
+		fontFamily: 'Inter-Regular',
+		width: '100%',
+		marginBottom: 15,
+		paddingLeft: 15,
+		fontSize: 18,
+		height: 50,
+		borderWidth: 1,
+		borderRadius: 24,
+	},
 	checkImage: {
 		width: 20,
 		height: 20,
@@ -60,8 +72,8 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderColor: '#3EBD93',
-		borderWidth: 2,
+		borderColor: theme.color_black,
+		borderWidth: 3,
 	},
 	opText: {
 		marginLeft: 12,

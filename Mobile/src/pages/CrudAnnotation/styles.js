@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	ViewText: {
-		// Componentes de texto
+		paddingHorizontal: 12,
 	},
 	componentNavigation: {
 		marginTop: 15,
@@ -35,24 +35,30 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 	},
 	inputText: {
-		marginBottom: "10%",
-		fontSize: 20
+		marginBottom: 20,
+		fontSize: 20,
+	},
+	viewInputDesc: {
+		height: 350,
+		alignItems: 'flex-start',
+		justifyContent: 'flex-start'
+	},
+	inputTextDesc: {
+		marginBottom: 20,
+		fontSize: 20,
 	},
 	containerMicButton: {
 		width: "100%",
 		alignItems: "center",
 		flexDirection: "column",
 		justifyContent: "center",
-		position: "absolute",
-		bottom: 150,
-		right: 0,
-		left: 20
 	},
 	micButton: {
 		backgroundColor: theme.color_primary10,
 		width: 85,
 		height: 85,
 		borderRadius: 50,
+		marginBottom: 15,
 		alignItems: "center",
 		justifyContent: "center"
 	},
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
 	viewButtons: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
-		marginBottom: 80,
+		marginBottom: 50,
 	},
 	button: {
 		width: '40%',

@@ -20,6 +20,38 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },
+    {
+      completeName: 'Daniel Sousa',
+      email: 'dan@tic.com',
+      password: '$2b$10$DYfI9JhEdhZxFXpmq5CBVOn1SMZn9bEwE8xCZIg/yYQvz.vThX03u',
+      isProfessional: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      completeName: 'Tanguy Baghdadi',
+      email: 'tan@tic.com',
+      password: '$2b$10$DYfI9JhEdhZxFXpmq5CBVOn1SMZn9bEwE8xCZIg/yYQvz.vThX03u',
+      isProfessional: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      completeName: 'Yevgeny Prigozhin',
+      email: 'yev@tic.com',
+      password: '$2b$10$DYfI9JhEdhZxFXpmq5CBVOn1SMZn9bEwE8xCZIg/yYQvz.vThX03u',
+      isProfessional: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      completeName: 'Vladmir Putin',
+      email: 'vla@tic.com',
+      password: '$2b$10$DYfI9JhEdhZxFXpmq5CBVOn1SMZn9bEwE8xCZIg/yYQvz.vThX03u',
+      isProfessional: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
   ], {});
   },
 

@@ -47,7 +47,7 @@ const ListingPatients = () => {
 
   return <>
     <View style={styles.safe}>
-      {patients ?
+      {patients?.length ?
         <FlatList
           showsVerticalScrollIndicator={false}
           data={patients}
@@ -60,7 +60,9 @@ const ListingPatients = () => {
           }
         />
         :
-        <Text>Você não possui nenhum registro ainda...</Text>
+        <View style={styles.emptyList}>
+            <Text style={styles.textEmptyList}>{`Você ainda não possui nenhum paciente vinculado.`}</Text>
+        </View>
         //Estilizar melhor este caso
       }
       {/* <TouchableOpacity style={styles.addButton} onPress={() => {  }}>
