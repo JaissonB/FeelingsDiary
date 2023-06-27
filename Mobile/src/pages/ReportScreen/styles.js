@@ -27,15 +27,17 @@ const styles = StyleSheet.create({
     textDesc: {
         fontSize: 17,
         color: theme.color_black,
-        marginVertical: 10,
+        marginTop: 10,
+        marginBottom: 50,
         maxWidth: 250,
         textAlign: "center"
     },
     viewChart: { 
-        height:300,
-        width: 300,
-        marginVertical: 25,
-        flexDirection: "row"
+        height: 200,
+        width: "100%",
+        marginBottom: 25,
+        flexDirection: "row",
+        alignItems: "flex-start"
     },
     textExplain: {
         fontSize: 14,
