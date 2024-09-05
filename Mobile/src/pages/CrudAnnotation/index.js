@@ -78,7 +78,7 @@ const CrudAnnotation = ({ route }) => {
         </View>
         <View>
           <Text style={styles.textlabelField}>
-            Título <Text style={{fontSize: 12}}>(Poderá ser visto pelo profissional)</Text>
+            Título <Text style={{ fontSize: 12 }}>(Poderá ser visto pelo profissional)</Text>
           </Text>
         </View>
         <TextInput
@@ -103,9 +103,9 @@ const CrudAnnotation = ({ route }) => {
 
       <View style={styles.containerMicButton}>
         <TouchableOpacity onPress={isRecording ? stopRecording : startRecording} style={styles.micButton}>
-          <Image style={styles.micImage} source={require("../../../assets/mic.png")}/>
+          <Image style={styles.micImage} source={require("../../assets/mic.png")} />
         </TouchableOpacity>
-        { isRecording && <Text style={styles.textRecording}>Ouvindo...</Text> }
+        {isRecording && <Text style={styles.textRecording}>Ouvindo...</Text>}
       </View>
 
       <View style={styles.viewButtons}>

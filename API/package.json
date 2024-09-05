@@ -1,5 +1,5 @@
 {
-  "name": "feelings-diary-api",
+  "name": "feelings_diary_api",
   "version": "1.0.0",
   "description": "REST API for mobile app to detect feelings",
   "main": "server.js",
@@ -8,20 +8,8 @@
     "start": "node ./src/server.js",
     "dev": "nodemon ./src/server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JaissonB/FeelingsDiary.git"
-  },
-  "author": "Jaisson Bassanesi",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JaissonB/FeelingsDiary/issues"
-  },
-  "homepage": "https://github.com/JaissonB/FeelingsDiary#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.22",
-    "sequelize-cli": "^6.6.0"
-  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
@@ -33,5 +21,9 @@
     "sentiment": "^5.0.2",
     "sequelize": "^6.31.0",
     "translatte": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "sequelize-cli": "^6.6.0"
   }
 }

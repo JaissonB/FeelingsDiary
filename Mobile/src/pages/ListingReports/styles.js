@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
 		marginHorizontal: 8,
 		justifyContent: 'center',
 	},
-    emojiItem: {
+	emojiItem: {
 		justifyContent: 'center',
-    },
+	},
 	labelTitle: {
 		color: theme.color_dark5,
 		fontFamily: 'Inter-Bold',
@@ -55,17 +55,17 @@ const styles = StyleSheet.create({
 		width: 30,
 		height: 30,
 	},
-    emptyList: {
-        flex: .9,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    textEmptyList: {
-        fontSize: 16,
-        maxWidth: 200,
-        color: theme.color_dark5,
-        textAlign: 'center'
-    }
+	emptyList: {
+		flex: .9,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	textEmptyList: {
+		fontSize: 16,
+		maxWidth: 200,
+		color: theme.color_dark5,
+		textAlign: 'center'
+	}
 });
 
 export default styles;

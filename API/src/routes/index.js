@@ -6,28 +6,28 @@ const patientRoutes = require('./patientRoutes');
 const jwt = require('jsonwebtoken');
 
 module.exports = (app, express) => {
-    app.use(cors());
-    app.use(express.json())
-    app.use(express.urlencoded({ extended: true}))
+	app.use(cors());
+	app.use(express.json())
+	app.use(express.urlencoded({ extended: true }))
 
-    app.get('/', (req, res) => res.send('Welcome to API-FeelingsDiary'));
-    
-    app.use(publicRoutes);
+	app.get('/', (req, res) => res.send('Welcome to API-FeelingsDiary'));
 
-    // ONLY AUTHENTICATE ACCESS
-    app.use((req, res, next) => {
-        let token = req.headers.authorization;
-        if (!token) return res.sendStatus(401);
-        token = token.replace('Bearer ', '');
-    
-        jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
-            if(err) return res.sendStatus(401);
-            req.userId = payload.userId;
-            next();
-        })
-    })
+	app.use(publicRoutes);
 
-    app.use(userRoutes);
-    app.use(notesRoutes);
-    app.use(patientRoutes);
+	// ONLY AUTHENTICATE ACCESS
+	app.use((req, res, next) => {
+		let token = req.headers.authorization;
+		if (!token) return res.sendStatus(401);
+		token = token.replace('Bearer ', '');
+
+		jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
+			if (err) return res.sendStatus(401);
+			req.userId = payload.userId;
+			next();
+		})
+	})
+
+	app.use(userRoutes);
+	app.use(notesRoutes);
+	app.use(patientRoutes);
 }

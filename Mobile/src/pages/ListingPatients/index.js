@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
-import add from "../../../assets/add.png";
-import profile from "../../../assets/profile.png";
-import chevron from "../../../assets/chevron.png";
+import profile from "../../assets/profile.png";
+import chevron from "../../assets/chevron.png";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
 import { getStorageData } from "../../services/storage";
@@ -61,7 +60,7 @@ const ListingPatients = () => {
         />
         :
         <View style={styles.emptyList}>
-            <Text style={styles.textEmptyList}>{`Você ainda não possui nenhum paciente vinculado.`}</Text>
+          <Text style={styles.textEmptyList}>{`Você ainda não possui nenhum paciente vinculado.`}</Text>
         </View>
         //Estilizar melhor este caso
       }
