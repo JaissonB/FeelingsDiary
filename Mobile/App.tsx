@@ -1,8 +1,7 @@
-import * as React from 'react';
-import Routes from './src/Routes';
+import React from "react";
+import Routes from "./src/Routes";
 
-function App(): JSX.Element {
-
+function App(): React.JSX.Element {
   return <>
     <Routes />
   </>

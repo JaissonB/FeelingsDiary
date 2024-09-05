@@ -13,7 +13,7 @@ const CheckBox = ({ option, stateCheck, toggle }) => {
         <TouchableOpacity style={styles.touchableOption} onPress={() => { toggle(!stateCheck) }}>
           {stateCheck &&
             <Image
-              source={require('../../../../Mobile/assets/check.png')}
+              source={require('../../assets/check.png')}
               style={styles.checkImage}
             />
           }
@@ -82,8 +82,8 @@ const Configuration = () => {
     if (!isProfessional) body.professionalTag = professionalTag;
     await api.put("users", body).then(response => {
       isProfessional ?
-      navigation.navigate("ListingPatients") :
-      navigation.navigate("ListingAnnotation");
+        navigation.navigate("ListingPatients") :
+        navigation.navigate("ListingAnnotation");
     }).catch(error => {
       console.error("Cadastre Error", error.response);
     });
@@ -94,7 +94,7 @@ const Configuration = () => {
   return <>
     <View style={styles.safe}>
       <Image
-        source={require('../../../assets/logo.png')}
+        source={require('../../assets/logo.png')}
         style={styles.logo}
       />
       <TextInput

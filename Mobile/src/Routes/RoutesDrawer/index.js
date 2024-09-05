@@ -17,7 +17,7 @@ const CustomDrawer = (props) => {
     try {
       await setStorageData("TOKEN", "");
       api.defaults.headers.common["authorization"] = null;
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
     navigation.navigate("Login");

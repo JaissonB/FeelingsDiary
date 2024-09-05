@@ -7,9 +7,9 @@ import theme from "../../theme";
 
 const ReportScreen = ({ route }) => {
   const { date, title, sentiment, positive, negative, neutral, completeName } = route?.params;
-	const emoji = sentiment === "positive" ? require("../../../assets/positiveFeel.png") :
-    sentiment === "negative" ? require("../../../assets/negativeFeel.png") : require("../../../assets/neutralFeel.png");
-	const desc = sentiment === "positive" ? "foi bom." : sentiment === "negative" ? "não foi tão bom." : "foi normal.";
+  const emoji = sentiment === "positive" ? require("../../assets/positiveFeel.png") :
+    sentiment === "negative" ? require("../../assets/negativeFeel.png") : require("../../assets/neutralFeel.png");
+  const desc = sentiment === "positive" ? "foi bom." : sentiment === "negative" ? "não foi tão bom." : "foi normal.";
 
   const data = [
     {
@@ -49,11 +49,11 @@ const ReportScreen = ({ route }) => {
     <View style={styles.safe}>
       <Text style={styles.textDate}>{dateToString(date)}</Text>
       <Text style={styles.textTitle}>{title}</Text>
-			<Image style={styles.emoji} source={emoji} />
+      <Image style={styles.emoji} source={emoji} />
       <Text style={styles.textDesc}>{`Parece que o dia de ${completeName} ${desc}`}</Text>
       <Text style={styles.textTitle}>Relatório gráfico</Text>
       <View style={styles.viewChart}>
-        <PieChart 
+        <PieChart
           data={data}
           width={350}
           height={220}
@@ -65,12 +65,12 @@ const ReportScreen = ({ route }) => {
         />
       </View>
       <View style={styles.viewExplainTexts}>
-        <Text style={styles.textExplain}>Este gráfico mostra a quantia de palavras 
-          <Text style={[styles.textExplain, {color: theme.color_chart_positive, fontWeight: "bold"}]}> positivas</Text>, 
-          <Text style={[styles.textExplain, {color: theme.color_chart_neutral, fontWeight: "bold"}]}> neutras </Text>
+        <Text style={styles.textExplain}>Este gráfico mostra a quantia de palavras
+          <Text style={[styles.textExplain, { color: theme.color_chart_positive, fontWeight: "bold" }]}> positivas</Text>,
+          <Text style={[styles.textExplain, { color: theme.color_chart_neutral, fontWeight: "bold" }]}> neutras </Text>
           (na maioria das vezes estas terão maior número) e
-          <Text style={[styles.textExplain, {color: theme.color_chart_negative, fontWeight: "bold"}]}> negativas </Text>
-          escritas por 
+          <Text style={[styles.textExplain, { color: theme.color_chart_negative, fontWeight: "bold" }]}> negativas </Text>
+          escritas por
           <Text style={styles.textExplain}>{` ${completeName} em ${dateToString(date)}.`}</Text>
         </Text>
       </View>

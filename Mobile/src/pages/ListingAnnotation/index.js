@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Text, View, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
-import add from "../../../assets/add.png";
+import add from "../../assets/add.png";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
 import { getStorageData } from "../../services/storage";
@@ -41,7 +41,7 @@ const ListingAnnotation = () => {
     const day = date.substring(8, 10);
     const month = consts[date?.substring(5, 7)];
     const year = date.substring(0, 4);
-    const descriptionPresentation = description.substring(0, 80) + ' ...'; 
+    const descriptionPresentation = description.substring(0, 80) + ' ...';
     return <>
       <TouchableOpacity onPress={() => { detailAnotation(title, description, date, id) }}>
         <View style={styles.itemList}>
@@ -77,7 +77,7 @@ const ListingAnnotation = () => {
         />
         :
         <View style={styles.emptyList}>
-            <Text style={styles.textEmptyList}>{`Você ainda não possui nenhuma anotação.`}</Text>
+          <Text style={styles.textEmptyList}>{`Você ainda não possui nenhuma anotação.`}</Text>
         </View>
       }
       <TouchableOpacity style={styles.addButton} onPress={() => { detailAnotation() }}>

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './style';
 import { setStorageData } from "../../services/storage";
 
@@ -18,7 +18,7 @@ const Login = () => {
     }
     cleanCache();
   }, [])
-  
+
   const writeTokenToStorage = async (token, name, flag) => {
     await setStorageData("TOKEN", token);
     await setStorageData("USER_NAME", name);
@@ -30,10 +30,13 @@ const Login = () => {
       email: email,
       password: password,
     }
+
+    navigation.navigate("RoutesDrawer");
+
     await api.post("authenticate", body).then(response => {
       response.data.isProfessional ?
-      navigation.navigate("RoutesDrawerProfessional") :
-      navigation.navigate("RoutesDrawer") 
+        navigation.navigate("RoutesDrawerProfessional") :
+        navigation.navigate("RoutesDrawer")
       api.defaults.headers.common["authorization"] = `Bearer ${response.data.token}`;
       writeTokenToStorage(response.data.token, response.data.completeName, response.data.isProfessional.toString());
     }).catch(error => {
@@ -45,13 +48,13 @@ const Login = () => {
 
   const handleRegister = () => {
     // Lógica de registro aqui
-    navigation.navigate("Configuration"); 
+    navigation.navigate("Configuration");
   };
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../../Mobile/assets/logo.png')}
+        source={require('../../assets/logo.png')}
         style={styles.logo}
       />
       <TextInput
